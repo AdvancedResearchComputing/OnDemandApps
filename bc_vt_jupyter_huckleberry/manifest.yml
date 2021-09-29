@@ -1,0 +1,7 @@
+---
+name: Jupyter Notebook
+category: Interactive Apps
+subcategory: 'Huckleberry'
+role: batch_connect
+description: |
+  Launch a Jupyter Notebook server on Huckleberry and will activate the PowerAI environment.

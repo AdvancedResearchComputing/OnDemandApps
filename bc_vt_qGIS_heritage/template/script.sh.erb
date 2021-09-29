@@ -1,0 +1,17 @@
+#!/bin/bash -l
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+echo running on ${host}:${port}
+
+pwd
+set -x
+
+
+singularity run --bind=/groups:/groups,/work:/work /groups/arcsingularity/qgis_desktop_3.8.sif qgis
+
+wait $!
+

@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+<%- gpu = context.gpu_per_node.to_i > 0 ? true : false -%>
+
+# Clean the environment
+module purge
+
+# Set working directory to home directory
+cd "${HOME}"
+
+#
+# Launch Xfce Window Manager and Panel
+#
+
+(
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+#
+# Start ParaView
+#
+
+# Load the required environment
+
+module load gcc/7.3.0
+module load openblas/0.2.20
+module load python/2.7.13
+module load openmpi/3.1.2
+module load phdf5/1.8.16
+module load qt/5.12.3
+module load ParaView/5.6.0
+
+# Launch ParaView
+<%- if gpu -%>
+module load cuda
+module list
+set -x
+# ParaView -desktop #-nosoftwareopengl
+<%- else -%>
+module list
+set -x
+# ParaView -desktop
+<%- end -%>

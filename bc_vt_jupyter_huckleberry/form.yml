@@ -1,0 +1,109 @@
+# Batch Connect app configuration file
+#
+# @note Used to define the submitted cluster, title, description, and
+#   hard-coded/user-defined attributes that make up this Batch Connect app.
+---
+
+# **MUST** set cluster id here that matches cluster configuration file located
+# under /etc/ood/config/clusters.d/*.yml
+cluster: 'huckleberry'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  # Set and load the  modules and environment that need to be loaded for Jupyter to run
+
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 48
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes (min-1, max-2)
+    required: true
+    value: 1
+    min: 1
+    max: 2
+    step: 1
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-20)
+    value: 10
+    min: 1
+    max: 20
+    step: 1
+
+  gpu_nodes:
+    widget: number_field
+    label: Number of GPUs per node (min-0, max-4)
+    value: 1
+    min: 0
+    max: 4
+    step: 1
+    help: |
+       - If requesting GPU nodes, you must enter a GPU-enabled Partition above or the job will fail.
+
+  modules:
+    widget: text_field
+    label: Required modules
+    value: "gcc/7.3.0 cuda/10.1.105 jdk/8.0.5.31 Anaconda3/2019.03"
+    help: |
+       - This should be spaced list of -compatible- modules.
+       - gcc/7.3.0 cuda/10.1.105 jdk/8.0.5.31 Anaconda3/2019.03
+
+  conda_env:
+    widget: text_field
+    label: Conda environment
+    value: "powerai16_ibm"
+    help: |
+       - This should be a Conda environment you wish to load.  The conda environment must contain ipykernel for this to work.  Once the notebook has started, you can type "!which python" to make sure you are within your Conda environrment.
+       - Use powerai16_ibm for the PowerAI toolset
+
+  bc_account:
+    widget: text_field
+    label: Account
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  python_user_base:
+    widget: text_field
+    label: PYTHONUSERBASE for user install packages
+    value: ""
+    help: |
+       - This sets the local directory for installing user packages.
+
+  # Any extra command line arguments to feed to the `jupyter notebook ...`
+  # command that launches the Jupyter notebook within the batch job
+  extra_jupyter_args: ""
+
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+# @note You typically do not need to modify this unless you want to add a new
+#   configurable value
+# @note If an attribute listed below is hard-coded above in the `attributes`
+#   option, then it will not appear in the form page that the user sees in the
+#   Dashboard
+form:
+  - extra_jupyter_args
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - gpu_nodes
+  - modules
+  - conda_env
+  - python_user_base
+  - bc_email_on_started

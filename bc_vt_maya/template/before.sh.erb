@@ -1,0 +1,43 @@
+#!/bin/bash
+
+env
+
+echo #####################################
+echo starting before.sh after a quick nap
+sleep 2
+echo #####################################
+env
+echo #####################################
+echo time to start the work ...
+
+
+
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+
+# creating and checking license pointer
+# added chmod for permission denied error, 
+# 
+FLEX="$HOME/.flexlmrc"
+LICENSE=`cat maya_license.txt`
+TEMPFILE="$HOME/.flextemp"
+TEMPFILE2="$HOME/.flextemp2"
+
+
+if [ ! -f $FLEX ]; then
+    printf $LICENSE >> $FLEX && chmod 755 $FLEX
+else	
+	cat $FLEX | 
+	awk -v var="$LICENSE" '{
+		if ( var ~ $0 )
+			exit
+		else
+			print var
+		}' > $TEMPFILE
+	awk 'NR==1' $TEMPFILE > $TEMPFILE2
+	cat $FLEX >> $TEMPFILE2
+	mv $TEMPFILE2 $FLEX && rm $TEMPFILE  && chmod 755 $FLEX
+
+fi
+
+echo end before.sh

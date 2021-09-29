@@ -1,0 +1,41 @@
+---
+cluster: "dragonstooth"
+attributes:
+  desktop: "xfce"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  node_type: null
+  bc_num_slots:
+    label: Number of nodes (min-1, max-2)
+    required: true
+    value: 1
+    min: 1
+    max: 2
+    step: 1
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-24)
+    value: 1
+    min: 1
+    max: 24
+    step: 1
+
+  reservation:
+    label: "Reservation"
+    help: "(Leave blank if you are not targeting a particular reservation.)"
+
+form:
+  - bc_vnc_idle
+  - desktop
+  - bc_account
+  - bc_queue
+  - reservation
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - node_type
+  - bc_vnc_resolution
+  - bc_email_on_started
+

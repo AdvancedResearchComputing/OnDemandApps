@@ -1,0 +1,4 @@
+jupyter/tensorflow-notebook:latest
+jupyter/datascience-notebook:latest
+jupyter/pyspark-notebook:latest
+jupyter/all-spark-notebook:latest

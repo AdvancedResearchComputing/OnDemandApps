@@ -1,0 +1,7 @@
+---
+name: Jupyter Notebook --Container
+category: Interactive Apps
+subcategory: 'Cascades'
+role: batch_connect
+description: |
+  Launch a Jupyter Notebook on Cascades and optionally activate a Conda environment.

@@ -1,0 +1,11 @@
+---
+name: COMSOL Multiphysics
+category: Interactive Apps
+subcategory: 'Cascades'
+role: batch_connect
+description: |
+  This app will launch a [COMSOL Multiphysics] GUI on the [Cascades cluster]. You
+  will be able to interact with the COMSOL GUI through a VNC session.
+
+  [COMSOL Multiphysics]: https://www.comsol.com
+  [Cascades cluster]: https://www.arc.vt.edu/cascades

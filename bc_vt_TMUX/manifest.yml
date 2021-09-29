@@ -1,0 +1,18 @@
+---
+name: TMUX
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch [TMUX] on [TinkerCliffs] and [Infer] -- coming soon.  The underlying desktop container is based off the awesome Xfce image by [accetto].
+  Once the application launches, an interactive terminal will also be launched. Enter the `bash` command to exit out of the Singularity shell and use the following command to start a TMUX session. `tmux new-session -s session-name -d`
+
+  [TMUX]: https://github.com/tmux/tmux/wiki
+  [accetto]: https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-g3
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+  [desktop container]: https://github.com/rsettlage/ubuntu-vnc-xfce-g3
+

@@ -1,0 +1,11 @@
+---
+name: VisIT
+category: Interactive Apps
+subcategory: Dragonstooth
+role: batch_connect
+description: |
+  This app will launch a [VisIT] GUI on the [Dragonstooth cluster]. You will be able to interact with the VisIT GUI 
+  through a VNC session.
+
+  [VisIT]: https://wci.llnl.gov/simulation/computer-codes/visit/
+  [Dragonstooth cluster]: https://www.arc.vt.edu/computing/dragonstooth/

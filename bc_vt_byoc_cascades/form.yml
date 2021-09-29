@@ -1,0 +1,45 @@
+---
+cluster: "cascades"
+form:
+  - SingContainer
+  - SingCache
+  - bc_account
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - queue
+  - bc_vnc_resolution
+  - bc_email_on_started
+attributes:
+  SingContainer:
+    widget: text_field
+    label: "Container to build e.g. docker://alpine:latest"
+    value: ""
+    help: |
+      - This should be the full container name from the registry
+      - This will run: <code>singularity pull --force *container*</code>
+      - Creating: <code>/work/cascades/*PID*/singularity/container_tag.sif</code>
+  SingCache:
+    widget: check_box
+    label: use cache if checked -- COMING SOON
+    checked: true
+    value: true
+    help: Unchecked adds flag <code>--disable-cache</code> to pull command
+  num_cores: "8"
+  bc_num_slots: "1"
+  bc_vnc_resolution:
+    required: true
+  bc_account:
+    label: "Slurm account"
+    help: "Slurm account, allocation, to use."
+  queue:
+    widget: select
+    label: "Choose the partition to run in.  This will be an 8 core job."
+    options:
+      - [ "preemptable_q",   "preemptable_q"  ]
+      - [ "normal_q,dev_q", "normal_q,dev_q"  ]
+      - [ "normal_q", "normal_q"  ]
+      - [ "dev", "dev_q"  ]
+      - [ "v100_normal_q", "v100_normal_q" ]
+      - [ "v100_dev_q", "v100_dev_q" ]
+

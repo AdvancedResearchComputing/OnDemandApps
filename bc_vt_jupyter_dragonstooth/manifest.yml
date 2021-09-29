@@ -1,0 +1,7 @@
+---
+name: Jupyter Notebook
+category: Interactive Apps
+subcategory: 'Dragonstooth'
+role: batch_connect
+description: |
+  Launch a Jupyter Notebook on DragonsTooth and activate a Conda environment.

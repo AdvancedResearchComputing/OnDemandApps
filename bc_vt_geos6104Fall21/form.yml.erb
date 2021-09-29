@@ -1,0 +1,33 @@
+# Batch Connect app configuration file
+#
+---
+cluster:
+  - 'tinkercliffs'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 72
+    step: 1
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-8)
+    value: 1
+    min: 1
+    max: 8
+    step: 1
+
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+form:
+  - bc_num_hours
+  - num_cores
+  - bc_email_on_started

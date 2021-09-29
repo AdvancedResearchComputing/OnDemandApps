@@ -1,0 +1,9 @@
+batch_connect:
+  template: vnc
+script:
+  native:
+    - "--nodes=<%= bc_num_slots.blank? ? "1" : bc_num_slots.to_i %>"
+    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
+    - "--gres=gpu:<%= gpu_per_node.blank? ? "0" : gpu_per_node %>"
+    - "--time=<%= bc_num_hours + ":0:0" %>"
+    - "--reservation=<%= reservation %>"

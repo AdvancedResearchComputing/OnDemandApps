@@ -1,0 +1,146 @@
+# Batch Connect app configuration file
+#
+---
+cluster: 
+  - 'tinkercliffs'
+#  - 'infer'
+
+#
+form:
+  - MayaVersion
+  - RenderEngine
+  - ProjectFolder
+  - SceneFile
+  - RenderImageFormat
+  - RenderImageSizeX
+  - RenderImageSizeY 
+  - StartFrame
+  - EndFrame
+  - SkipExistingFrames
+  - OtherOptions
+  - bc_account
+  - bc_queue
+  - bc_num_hours
+  - bc_num_nodes
+  - num_cores
+  - bc_email_on_started
+
+# for reference
+#  https://osc.github.io/ood-documentation/latest/app-development/interactive/form.html
+#
+
+
+#
+attributes:
+  # Set and load the modules and environment that need to be loaded for Jupyter to run
+
+  # won't support multiple version
+  MayaVersion: "Maya 2020 v4"
+
+
+  RenderEngine: "arnold"
+#  RenderEngine: "renderman"    ## Pixar Renderman - works but runs on separate ood.
+      
+  ProjectFolder:
+    widget: text_field
+    label: Project Folder
+    help: |
+           "Set your project folder where the workspace.mel is located. <br />
+           If the workspace.mel is inside `/home/yourPID/maya/projects/default`,  <br />
+           then 'maya/projects/default' without quote."
+    required: true
+    value: "maya/projects/default"
+
+  SceneFile:
+    widget: text_field
+    label: Scene File
+    help: |
+            "e.g. `/home/yourPID/maya/projects/default/scenes/My_Scene.mb` <br />
+            then 'scenes/My_Scene.mb'"
+    required: true
+    value: "scenes/"
+
+  RenderImageFormat:
+    widget: select
+    label: "Rendering Image Format"
+    help: "Image file format; exr or png"
+    required: true
+    options:
+      - [ "EXR", "exr"  ]
+      - [ "PNG", "png"  ]
+
+  RenderImageSizeX:
+    widget: number_field
+    label: "Rendering Image Size (default '720')"
+    help: |  
+            "Image size X pixel dimension;  <br />
+            Render at lower resolution first then increase to your size"
+    required: true
+    value: "720"     
+
+  RenderImageSizeY:
+    widget: number_field
+    label: "Rendering Image Size (default '480')"
+    help: |  
+            "Image size Y pixel dimension;  <br />
+            Render at lower resolution first then increase to your size"
+    required: true
+    value: "480"     
+      
+  StartFrame:
+    widget: number_field
+    label: Start Frame
+    required: true
+    min: 0e
+    value: "0"
+
+  EndFrame:
+    widget: number_field
+    label: End Frame
+    required: true
+    min: 1
+    value: "1"
+
+  SkipExistingFrames:
+    widget: check_box
+    label: "Skip Existing Frames"
+    help: "Select to skip already rendered frames"
+
+  OtherOptions:
+    widget: text_field
+    label: Other Command Line Options
+    help: |  
+            "**advanced options**; leave blank.<br />
+            only use if you have tested it on your computer with same command."
+    required: false
+    value: ""
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-72)
+    required: true
+    value: 4
+    min: 1
+    max: 72
+    step: 1
+
+  bc_queue: "normal_q"
+  bc_num_nodes: 1
+#  bc_account: arcadm
+  bc_account:
+    widget: text_field
+    label: "Account (ARC allocation)"
+    help: "Ask your instructor"
+    value: ""
+    required: true
+
+  num_cores:
+    widget: select
+    label: "Number of compute cores"
+    help: "This determines how many cores are in the compute job -- more cores, longer wait to start, potentiall faster time to complete."
+    options:
+     - [ "4", "4" ]
+     - [ "8", "8" ]
+     - [ "16", "16" ]
+     - [ "32", "32" ]
+
+

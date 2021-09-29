@@ -1,0 +1,39 @@
+# Set some variables
+LMSEXEC="../bin/lmstat"  # PATH to lmstat program
+LMSERV='1718@comsol.software.vt.edu' # lmstat server to query formed as PORTNUM@HOSTNAME
+SLP_TIME=60 # How long to wait before checking again for licenses
+
+# Check availability of some particular Comsol licenses
+ACDC_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep ACDC: | cut -f 2 -d " ")
+ACOUSTICS_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep ACOUSTICS: | cut -f 2 -d " ")
+COMSOL_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep COMSOL: | cut -f 2 -d " ")
+OPTIMIZATION_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep OPTIMIZATION: | cut -f 2 -d " ")
+
+# Print observed license availability
+echo "Found $ACOUSTICS_lic_avail ACOUSTICS available"
+echo "Found $ACDC_lic_avail ACDC available"
+echo "Found $COMSOL_lic_avail COMSOL available"
+echo "Found $OPTIMIZATION_lic_avail OPTIMIZATION available"
+
+# If any necessary licenses are not available, then enter loop
+while [[ $ACDC_lic_avail = 0 || $ACOUSTICS_lic_avail = 0 || $COMSOL_lic_avail = 0 || $OPTIMIZATION_lic_avail = 0 ]]
+do
+
+   echo "Needed licenses not available, sleeping..."
+   sleep 300 # this waits for 5 minutes (300s) before proceeding
+
+   # Update license statuses
+   ACDC_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep ACDC: | cut -f 2 -d " ")
+   ACOUSTICS_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep ACOUSTICS: | cut -f 2 -d " ")
+   COMSOL_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep COMSOL: | cut -f 2 -d " ")
+   OPTIMIZATION_lic_avail=$($LMSEXEC -a -c $LMSERV | grep "Users of.*Total" | awk '{ print $3, ($6-$11) }' | grep OPTIMIZATION: | cut -f 2 -d " ")
+
+   # Print updated status
+   echo "Found $ACDC_lic_avail ACDC available"
+   echo "Found $ACOUSTICS_lic_avail ACOUSTICS available"
+   echo "Found $COMSOL_lic_avail COMSOL available"
+   echo "Found $OPTIMIZATION_lic_avail OPTIMIZATION available"
+
+done
+
+echo "All needed licenses are available. Continuing execution now..."

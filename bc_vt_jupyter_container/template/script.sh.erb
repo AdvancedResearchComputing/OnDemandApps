@@ -1,0 +1,49 @@
+#!/bin/bash
+
+echo "start of script.sh"
+
+unset XDG_RUNTIME_DIR
+
+# Benchmark info
+#
+echo "Hostname -- "
+hostname
+echo "TIMING -- Starting main script at: $(date)"
+
+# Set working directory to home directory
+cd "${HOME}"
+
+#
+# Start Jupyter Notebook Server
+#
+
+#### load the required modules
+# Load the require modules
+module load containers/singularity
+module list
+
+# make sure to activate the conda environment
+##- unless context.conda_env.blank? -%>
+##source activate = context.conda_env %>
+##- end -%>
+
+#### add python user base
+##- unless context.python_user_base.blank? -%>
+## export PYTHONUSERBASE== context.python_user_base %>
+##- end -%>
+
+
+# Benchmark info
+echo "TIMING - Starting jupyter at: $(date)"
+
+# Launch the Jupyter Notebook Server
+set -x
+#
+#
+
+singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects,/work:/work \
+   /projects/arcsingularity/AMD/<%= context.Container %> \
+   jupyter notebook --config="${CONFIG_FILE}"
+
+echo "end of script.sh"
+

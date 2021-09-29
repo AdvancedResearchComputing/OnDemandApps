@@ -1,0 +1,68 @@
+#!/bin/bash
+sleep 2
+
+echo starting script.sh
+
+unset XDG_RUNTIME_DIR
+
+## Load up singularity module:
+#TinkerCliffs
+module --ignore-cache load containers/singularity
+    #Cascades
+    #module --ignore-cache load "singularity"
+    
+    module list
+    
+    #cd $TMPDIR
+    #mkdir render_job
+    
+    # changed above command to be unique per user
+    RENDER_JOB_TMPDIR=$TMPFS
+    ##$(mktemp -d -t "$(whoami)_render_XXXXXXXXX")
+    chmod o+rw $RENDER_JOB_TMPDIR
+    cd $RENDER_JOB_TMPDIR
+    # for debugging
+    #pwd
+    
+    ######## VARIABLES FROM ONDEMAND form
+    
+    export ENGINE="<%= context.RenderEngine %>"
+    export MAYA_PROJ_FOLDER="<%= context.ProjectFolder %>"
+    export SCENEFILE="$MAYA_PROJ_FOLDER/<%= context.SceneFile %>"
+    export FORMAT="<%= context.RenderImageFormat %>"
+    export SIZE_X="<%= context.RenderImageSizeX %>"
+    export SIZE_Y="<%= context.RenderImageSizeY %>"
+    export STARTFRAME="<%= context.StartFrame %>"
+    export ENDFRAME="<%= context.EndFrame %>"
+    export SKIP="<%= context.SkipExistingFrames %>"
+    export OPTS="<%= context.OtherOptions %>"
+    
+    # to make absoulte path, it won't work without this
+    export USER_DIR="$HOME/$MAYA_PROJ_FOLDER"
+    #
+    
+    
+    ## Maya singularity container; v2020.4
+    # latest image as of 2021/02/18
+    export MAYA_IMG="/projects/arcsingularity/maya_maya2020.sif"
+    
+    export DIR_BINDS=${RENDER_JOB_TMPDIR}:/tmp,/projects:/projects,/work:/work
+    
+    echo $DIR_BINDS
+    
+    mkdir $TMPFS/runtime-root
+    chmod 777 $TMPFS/runtime-root
+
+    ## Final Rendering command
+    singularity exec --writable-tmpfs --bind $DIR_BINDS --bind $TMPFS:/var/tmp $MAYA_IMG \
+        Render -r $ENGINE \
+        -proj $USER_DIR \
+        -of $FORMAT \
+        -x $SIZE_X -y $SIZE_Y \
+        -s $STARTFRAME -e $ENDFRAME \
+        -skipExistingFrames $SKIP \
+        $OPTS \
+        -im "<Scene>_<Layer>_<Camera>" -fnc name_#.ext -pad 4 \
+        $SCENEFILE
+    
+ echo end script.sh

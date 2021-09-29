@@ -1,0 +1,19 @@
+#!/bin/bash -l
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+echo running on ${host}:${port}
+
+pwd
+
+module list
+set -x
+DISPLAY=$DISPLAY singularity run --writable-tmpfs \
+  --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/groups,/work \
+  /groups/arcsingularity/<%= context.version %>
+
+wait $!
+

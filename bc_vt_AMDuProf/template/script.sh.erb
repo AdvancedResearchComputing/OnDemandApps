@@ -1,0 +1,20 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module load tinkercliffs-rome/amd-uprof/3.4.475
+module list
+
+echo running on `hostname`
+echo running on ${host}:${port}
+
+AMDuProf
+
+wait $!
+

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash 
+  
+# Clean the environment 
+module purge
+
+# Set working directory to PBS directory 
+cd "${HOME}"
+
+#
+# Launch Xfce Window Manager and Panel
+#
+
+(
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+#
+# Start Stata
+#
+
+# Load the required enviornment
+module load stata/14.0.0
+# For reference:
+# 
+# whatis("loads stata")
+# help([[This module loads stata]])
+# setenv("OSC_STATA_DIR","/usr/local/stata/15")
+# prepend_path("PATH","/usr/local/stata/15")
+
+# Launch stata
+# note that xstata-mp doesn't block so we have to watch it
+xstata-mp
+
+# Get the PID of the last xstata-mp process started that I own
+stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
+# As long as the PID directory exists we wait
+while [[ -d "/proc/$stata_pid" ]]; do
+  sleep 1
+done

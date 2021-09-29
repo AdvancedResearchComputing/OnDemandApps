@@ -1,0 +1,15 @@
+---
+name: VisIT
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch a [VisIT] GUI on the [TinkerCliffs cluster]. You will be able to interact with the VisIT GUI 
+  through a VNC session.  For issues or requests, please submit a github issue for the [desktop OOD app].<P><HR/><P>
+
+  [VisIT]: https://wci.llnl.gov/simulation/computer-codes/visit/
+  [TinkerCliffs cluster]: https://www.arc.vt.edu/computing/tinkercliffs/
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop

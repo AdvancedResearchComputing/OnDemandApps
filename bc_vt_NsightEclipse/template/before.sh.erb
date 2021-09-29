@@ -1,0 +1,31 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+
+echo loading cuda toolkit version <%= context.ide_version%>
+module load cuda<%= context.ide_version%>/toolkit
+echo loaded cuda toolkit 
+
+module load containers/singularity
+singularity run --cleanenv --env PYTHONPATH=/usr/local/lib/python3.8/dist-packages/websockify-0.9.0-py3.8.egg \
+--env PYTHONPATH=/usr/local/lib/python3.8/dist-packages/websockify-0.9.0-py3.8.egg \
+--env CUDA_PATH=$CUDA_PATH \
+--env CUDA_ROOT=$CUDA_ROOT \
+--env CUDA_CMLOCAL_ROOT=$CUDA_CMLOCAL_ROOT \
+--env CUDA_INSTALL_PATH=$CUDA_INSTALL_PATH \
+--env LD_LIBRARY_PATH=$LD_LIBRARY \
+--env CUDA_HOME=$CUDA_HOME \
+--env CUDA_INC_PATH=$CUDA_INC_PATH \
+--env CUDA_SDK=$CUDA_SDK \
+--env LIBRARY_PATH=$LIBRARY_PATH \
+--env CUDA_CACHE_DISABLE=$CUDA_CACHE_DISABLE \
+--env LD_LIBRARY_PATH=$LD_LIBRARY_PATH \
+--env PATH=$PATH \
+--env LD_RUN_PATH=$LD_RUN_PATH \
+--env INCLUDEPATH=$INCLUDEPATH \
+    --bind `pwd`:/cwd,/projects,/work/$USER,/cm/shared \
+    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+#while [ ! -f ./connection.rc ]; do sleep 1; done
+#source connection.rc
+

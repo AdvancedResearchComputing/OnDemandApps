@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+pwd
+unset XDG_RUNTIME_DIR
+export http_proxy="http://uaserve.cc.vt.edu:8080"; export https_proxy="http://uaserve.cc.vt.edu:8080"
+
+
+echo starting singularity
+
+module load singularity/3.5.1
+#### make sure singularity directory is present
+if [ ! -d ${SINGULARITY_PULLDIR} ]; then
+   mkdir -vp ${SINGULARITY_PULLDIR}
+fi
+
+# pull the RStudio Server
+# echo build container first, this can take some time
+# echo ood-rstudio-<%= context.Rpackageset %>:<%= context.Rversion %>
+# ##singularity pull --force docker://rsettlag/ood-rstudio-<%= context.Rpackageset %>:<%= context.Rversion %>
+## and then move to /groups/arcsingularity
+
+echo
+echo
+echo "fix the rstudio error on start, note this is because the Rstudio Open Source version doesn't support multiple sessions and most"
+echo "users will not close R sessions"
+find ~/.rstudio/sessions/active/*/session-persistent-state -type f -exec sed -i 's/abend="1"/abend="0"/' '{}' \;
+
+echo
+echo
+echo "need to make Renviron file dynamically, calling it .Renviron.OOD, seems as though to use this file, needs to be baked into Rstudio config, ie sif"
+
+echo "R_LIBS_USER= ${HOME}/R/OOD/" >.Renviron.OOD.<%= context.Rpackageset %>_<%= context.Rversion %>
+singularity exec /groups/arcsingularity/ood-rstudio-<%= context.Rpackageset %>_<%= context.Rversion %>.sif lsb_release -ir | awk '{ print $NF"-" }' | tr -d '\n' >>.Renviron.OOD.<%= context.Rpackageset %>_<%= context.Rversion %>
+singularity exec /groups/arcsingularity/ood-rstudio-<%= context.Rpackageset %>_<%= context.Rversion %>.sif Rscript -e 'cat(R.version$major,".",R.version$minor,sep="")' >>.Renviron.OOD.<%= context.Rpackageset %>_<%= context.Rversion %>
+
+echo make actual change
+echo $(cat .Renviron.OOD.<%= context.Rpackageset %>_<%= context.Rversion %>) | sed 's/ //g' >.Renviron.OOD
+cat .Renviron.OOD
+source .Renviron.OOD
+echo R_LIBS_USER is $R_LIBS_USER
+
+cp -v .Renviron.OOD ~/.Renviron.OOD
+
+#### set/create R_LIBS directory
+if [ ! -d ${R_LIBS_USER} ]; then
+    echo need to make R_LIBS_USER directory
+    mkdir -p ${R_LIBS_USER}
+fi
+
+## now create rsession.sh
+# Generate an `rsession` wrapper script
+# export RSESSION_WRAPPER_FILE="${PWD}/rsession.sh"
+# (
+# umask 077
+# sed 's/^ \{2\}//' > "${RSESSION_WRAPPER_FILE}" << EOL
+#  #!/usr/bin/env bash
+#  # Launch the original command
+#  echo "Launching rsession..."
+#  set -x
+#  exec rsession --session-timeout-minutes 0 "\${@}"
+#EOL
+#)
+#chmod 700 "${RSESSION_WRAPPER_FILE}"
+
+# Start Rstudio Server
+echo
+echo
+echo starting Rstudio Server on $(hostname)
+
+## /groups/arcsingularity/ood-rstudio-<%= context.Rpackageset %>_<%= context.Rversion %>.sif rserver \
+singularity exec --bind=${TMPDIR}:/tmp,${TMPFS}:/usr/local/lib/R/site-library/swirl/user_data/,/groups:/groups,/work:/work,profiles:/etc/rstudio/profiles,Rprofile.site:/usr/local/lib/R/etc/Rprofile.site \
+   /groups/arcsingularity/ood-rstudio-<%= context.Rpackageset %>_<%= context.Rversion %>.sif rserver \
+   --auth-encrypt-password=0 \
+   --server-app-armor-enabled=0 \
+   --auth-none=0 \
+   --www-port=${port} \
+   --auth-pam-helper-path=pam-helper
+##   --rsession-path="${RSESSION_WRAPPER_FILE}" 
+

@@ -1,0 +1,106 @@
+# Batch Connect app configuration file
+#
+# @note Used to define the submitted cluster, title, description, and
+#   hard-coded/user-defined attributes that make up this Batch Connect app.
+---
+
+# **MUST** set cluster id here that matches cluster configuration file located
+# under /etc/ood/config/clusters.d/*.yml
+cluster: 'cascades'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  # Set and load the  modules and environment that need to be loaded for Jupyter to run
+
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 72
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes (min-1, max-2)
+    required: true
+    value: 1
+    min: 1
+    max: 2
+    step: 1
+
+  bc_account:
+    widget: text_field
+    label: Account
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-32)
+    value: 10
+    min: 1
+    max: 32
+    step: 1
+
+  gpu_nodes:
+    widget: number_field
+    label: Number of GPUs per node (min-0, max-2)
+    value: 0
+    min: 0
+    max: 2
+    step: 1
+    help: |
+       - If requesting GPU nodes, you must enter a GPU-enabled Partition above or the job will fail.
+
+  Container:
+    widget: select
+    label: "Container set"
+    options:
+      - [ "tensorflow-notebook", "tensorflow-notebook_latest" ]
+      - [ "datascience-notebook", "datascience-notebook_latest" ]
+      - [ "pyspark-notebook", "pyspark-notebook_latest" ]
+      - [ "all-spark-notebook", "all-spark-notebook_latest" ]
+    help: |
+       - These Images are pulled directly from the Jupyter Docker Stacks.  See here: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#core-stacks
+
+  conda_env:
+    widget: text_field
+    label: Conda environment
+    value: ""
+    help: |
+       - This should be a Conda environment you wish to load.  The conda environment must contain ipykernel for this to work.  Once the notebook has started, you can type "!which python" to make sure you are within your Conda environrment.
+
+  python_user_base:
+    widget: text_field
+    label: PYTHONUSERBASE for user install packages
+    value: ""
+    help: |
+       - This sets the local directory for installing user packages.
+
+  # Any extra command line arguments to feed to the `jupyter notebook ...`
+  # command that launches the Jupyter notebook within the batch job
+  extra_jupyter_args: ""
+
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+form:
+  - Container
+  - extra_jupyter_args
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - gpu_nodes
+  - conda_env
+  - python_user_base
+  - bc_email_on_started

@@ -1,0 +1,12 @@
+---
+name: MATLAB
+category: Interactive Apps
+subcategory: Cascades-DragonsTooth-Huckleberry
+role: batch_connect
+description: |
+  This app will launch a [MATLAB] GUI on the [Cascades] or [Dragonstooth] cluster. You will be able
+  to interact with the MATLAB GUI through a VNC session.
+
+  [MATLAB]: https://www.mathworks.com/products/matlab.html
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Dragonstooth]: https://www.arc.vt.edu/dragonstooth

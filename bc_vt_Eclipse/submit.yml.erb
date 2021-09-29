@@ -1,0 +1,23 @@
+# Job submission configuration file
+#
+---
+
+#
+# Configure the content of the job script for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template
+#
+batch_connect:
+  template: "basic"
+  set_host: "host=$(hostname -s)"
+#
+# Configure the job script submission parameters for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
+#
+script:
+  copy_environment: true
+  native: 
+    - "--nodes=<%= bc_num_slots.blank? ? "1" : bc_num_slots.to_i %>"
+    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
+    - "--time=<%= bc_num_hours + ":0:0" %>"
+    - "--reservation=<%= reservation %>"
+    - "--account=<%= bc_account %>"

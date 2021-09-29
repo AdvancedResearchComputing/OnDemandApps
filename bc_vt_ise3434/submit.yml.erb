@@ -1,0 +1,36 @@
+# Job submission configuration file
+#
+---
+
+#
+# Configure the content of the job script for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template
+#
+batch_connect:
+  template: "basic"
+  set_host: "host=$(hostname -s)"
+
+
+  # You can override the command used to query the hostname of the compute node
+  # here
+  #
+  # @note It is **highly** recommended this be set in the global cluster
+  #   configuration file so that all apps can take advantage of it by default
+  #
+#
+# Configure the job script submission parameters for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
+#
+#script:
+#  queue_name: "queue1"
+#  accounting_id: "account1"
+#  email_on_started: true
+#  native: # ... array of command line arguments ...
+
+script:
+  native:
+    - "--nodes=<%= "1" %>"
+    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
+    - "--time=<%= bc_num_hours + ":0:0" %>"
+    - "--account=roberthildebrand"
+    - "--partition=normal_q"

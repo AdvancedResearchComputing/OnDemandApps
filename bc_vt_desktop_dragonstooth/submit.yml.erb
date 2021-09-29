@@ -1,0 +1,8 @@
+---
+batch_connect:
+  template: vnc
+script:
+  native:
+    - "--nodes=<%= bc_num_slots.blank? ? "1" : bc_num_slots.to_i %>"
+    - "--reservation=<%= reservation %>"
+    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"

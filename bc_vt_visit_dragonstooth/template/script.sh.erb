@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Set working directory to PBS directory
+cd "${HOME}"
+
+#
+# Launch Xfce Window Manager and Panel
+#
+
+(
+  unset XDG_RUNTIME_DIR
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+#
+# Start QGIS
+#
+export http_proxy="http://uaserve.cc.vt.edu:8080"; export https_proxy="http://uaserve.cc.vt.edu:8080"
+
+
+
+module load singularity/3.5.1
+##singularity pull qgis.sif shub://OSC/sa_singularity_qgis
+
+
+singularity run --bind=/groups:/groups,/work:/work /groups/arcsingularity/<%= context.version %>
+##singularity run /work/cascades/rsettlag/singularity/qgis_desktop_3.8.sif
+
+
+

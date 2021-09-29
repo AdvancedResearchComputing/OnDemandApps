@@ -1,0 +1,61 @@
+# Batch Connect app configuration file
+---
+cluster: 'dragonstooth'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+
+  bc_queue:
+    help: |
+      - For faster, shorter jobs, try dev_q.
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 48
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes (license is single node only)
+    required: true
+    value: 1
+    min: 1
+    max: 1
+    step: 1
+
+  bc_account:
+    widget: text_field
+    label: Allocation
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  num_cores: 
+    widget: number_field
+    label: Number of cores per node (min-1, max-16 per license)
+    value: 16
+    min: 1
+    max: 16
+    step: 1
+
+  version:
+    widget: select
+    label: "VisIT version"
+    help: "This defines the version of VisIT you want to load."
+    options:
+     - [ "2.12.3", "ood-visit_2.12.3" ]
+     - [ "3.1.1", "ood-visit_3.1.1" ]
+
+form:
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - version
+  - bc_vnc_resolution
+  - bc_email_on_started

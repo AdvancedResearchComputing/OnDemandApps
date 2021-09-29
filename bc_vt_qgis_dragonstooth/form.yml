@@ -1,0 +1,32 @@
+---
+cluster: "dragonstooth"
+form:
+  - bc_account
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - bc_queue
+  - bc_vnc_resolution
+  - reservation
+  - bc_email_on_started
+attributes:
+  num_cores:
+    widget: "number_field"
+    label: "Number of cores"
+    value: 1
+    help: |
+      Number of cores on node (10 GB per core).
+    min: 0
+    max: 24
+    step: 1
+    id: 'num_cores'
+  bc_num_slots: "1"
+  bc_vnc_resolution:
+    required: true
+  bc_account:
+    label: "Allocation"
+    help: "This is the SLURM account to charge."
+  bc_queue:
+    value: normal_q
+    help: |
+      - This app is not GPU enabled, please use normal_q or dev_q.

@@ -1,0 +1,52 @@
+---
+cluster: "cascades"
+attributes:
+  desktop: "xfce"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  node_type: null
+  bc_num_slots:
+    label: Number of nodes (min-1, max-2)
+    required: true
+    value: 1
+    min: 1
+    max: 2
+    step: 1
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-32)
+    value: 1
+    min: 1
+    max: 32
+    step: 1
+
+  gpu_nodes:
+    widget: number_field
+    label: Number of GPUs per node (min-0, max-2)
+    value: 1
+    min: 0
+    max: 2
+    step: 1
+    help: |
+       - If requesting GPU nodes, you must enter a GPU-enabled Partition above or the job will fail.
+
+  reservation:
+    label: "Reservation"
+    help: "(Leave blank if you are not targeting a particular reservation.)"
+
+form:
+  - bc_vnc_idle
+  - desktop
+  - bc_account
+  - bc_queue
+  - reservation
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - gpu_nodes
+  - node_type
+  - bc_vnc_resolution
+  - bc_email_on_started
+

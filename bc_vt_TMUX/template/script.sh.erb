@@ -1,0 +1,27 @@
+#!/bin/bash
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+
+module load containers/singularity
+
+sleep 2
+ls /tmp/.X11-unix
+echo starting TMUX
+
+echo DISPLAY:$DISPLAY
+echo USER:$USER
+
+
+# Path to TMUX image
+tmux_img='/projects/arcsingularity/tmux_latest.sif'
+
+singularity exec --env LC_ALL=C --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work $tmux_img bash runScript.sh
+
+wait $!

@@ -1,0 +1,13 @@
+# Wait for the X server to start
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+echo "Waiting for VNC Server to open port ${host}:${port}..."
+if wait_until_port_used "${host}:${port}" 2400; then
+  echo "Discovered VNC Server listening on port ${port}!"
+else
+  echo "Timed out waiting for VNC Server to open port ${port}!"
+  clean_up 1
+fi
+sleep 2

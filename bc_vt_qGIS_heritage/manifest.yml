@@ -1,0 +1,15 @@
+---
+name: qGIS
+category: Interactive Apps
+subcategory: Cascades-DragonsTooth-Huckleberry
+role: batch_connect
+description: |
+  This app will launch a [QGIS] GUI on the [Cascades] or [Dragonstooth] cluster. You will be able to interact with the QGIS GUI through a VNC session.  For issues or requests, please submit a github issue for the [desktop OOD app] or the [desktop container].<P>
+
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+

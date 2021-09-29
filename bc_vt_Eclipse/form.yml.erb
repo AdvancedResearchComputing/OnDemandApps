@@ -1,0 +1,72 @@
+# Batch Connect app configuration file
+#
+---
+cluster: 
+  - 'tinkercliffs'
+  - 'infer'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+
+# specify widgets for user modifiable job settings
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q, t4_normal_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 72
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes (currently confined to 1)
+    required: true
+    value: 1
+    min: 1
+    max: 1
+    step: 1
+
+  bc_account:
+    widget: text_field
+    label: Account
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-32)
+    value: 1
+    min: 1
+    max: 32
+    step: 1
+
+  bc_vnc_resolution:
+    required: true
+
+  ide_version:
+    widget: select
+    label: "Select the IDE you want. Java or C++ "
+    help: "This defines the type of IDE users want to work with."
+    options:
+    <%- Dir.glob('/projects/arcsingularity/eclipse*sif').each do |f| -%>
+      <%- sif = f.sub('/projects/arcsingularity/','') -%>
+      - [ "eclipse_ver: <%= sif %>", "<%= sif %>" ]
+    <%- end -%>
+
+
+form:
+  - cluster
+  - ide_version
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - bc_vnc_resolution
+  - bc_email_on_started

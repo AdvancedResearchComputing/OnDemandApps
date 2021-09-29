@@ -1,0 +1,37 @@
+#!/bin/bash
+pwd
+unset XDG_RUNTIME_DIR
+function have { type -t "$1" >/dev/null; }
+while ! have module; do echo "waiting"; sleep 1; done; echo "module works"
+
+echo starting singularity
+
+module load containers/singularity
+module load $LMOD_SYSTEM_NAME/matlab/R2021a
+
+## load other modules if desired
+<%- unless context.modules.blank? -%>
+  echo loading additional modules <%= context.modules %>
+  module load <%= context.modules %>
+<%- end -%>
+
+## need CUDA?
+<%- unless context.gpu_per_node== '0' -%>
+module load cuda-latest/toolkit/11.2.0
+<%- end  -%> 
+
+echo starting Matlab on $(hostname) using $port
+
+## APP_PORT=$port MLM_LICENSE_FILE=/apps/packages/matlab/R2021a/licenses/network.lic
+
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+export SINGULARITYENV_PATH=$PATH
+singularity run --nv --writable-tmpfs \
+    --bind=$MATLAB_DIR:/opt/matlab,$TMPFS:/tmp,/work/${USER},/projects \
+    --bind=`pwd`/matlab.rc:/mathworks.rc,/cm,/etc/slurm/slurm.conf \
+    --bind=/lib64/libhistory.so.6:/lib/x86_64-linux-gnu/libhistory.so.6 \
+    --bind=/usr/lib64/libmunge.so.2:/lib/x86_64-linux-gnu/libmunge.so.2,/var/run/munge \
+    --bind=`pwd`/entrypoint.sh:/entrypoint.sh \
+    /projects/arcsingularity/matlab-html_Aug2021a.sif bash /entrypoint.sh
+
+wait $!

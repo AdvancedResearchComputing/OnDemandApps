@@ -1,0 +1,8 @@
+### This remote desktop is set to consume:
+
++ CPUs: "<%= bc_num_slots.blank? ? "1" : bc_num_slots.to_i %>"
++ Cores: "<%= num_cores.blank? ? "1" : num_cores %>"
++ GPUs: "<%= gpu_per_node.blank? ? "1" : gpu_per_node.to_i %>"
++ Time: "<%= bc_num_hours + ":0:0" %>"
++ Charge account: "<%= bc_account %>"
+

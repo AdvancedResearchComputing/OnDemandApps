@@ -1,0 +1,17 @@
+## this should be bind-mounted to /usr/local/lib/R/etc/Rprofile.site
+
+options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')
+options(repos = c(CRAN='https://mran.microsoft.com/snapshot/2019-12-12'), download.file.method = 'libcurl')
+
+
+# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST
+# is not set since a redirect to localhost may not work depending upon
+# where this Docker container is running.
+if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) {
+  options(httr_oob_default = TRUE)
+}
+
+
+# Configure http(s) proxy
+Sys.setenv(http_proxy="http://uaserve.cc.vt.edu:8080")
+Sys.setenv(https_proxy="http://uaserve.cc.vt.edu:8080")

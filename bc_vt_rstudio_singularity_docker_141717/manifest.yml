@@ -1,0 +1,6 @@
+---
+name: Rstudio -- Rstudio 1.4.1717, R>4.1
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch a Rstudio Server in a container on one node.  Note Rstudio 1.4.1717 does not work with previous versions of the Rstudio OnDemand app.

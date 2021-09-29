@@ -1,0 +1,10 @@
+---
+name: GAMS Studio
+category: Interactive Apps
+subcategory: Cascades
+role: batch_connect
+description: |
+  This app will launch a [GAMS Studio] GUI instance in noVNC. You will be able
+  to interact with the GAMS Studio through an ARC job session.
+
+  [GAMS Studio]: https://www.gams.com/latest/docs/T_STUDIO.html

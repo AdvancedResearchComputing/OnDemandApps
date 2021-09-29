@@ -1,0 +1,49 @@
+# Batch Connect app configuration file
+#
+---
+cluster: 
+  - 'tinkercliffs'
+  - 'infer'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+
+# specify widgets for user modifiable job settings
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q, t4_normal_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 72
+    step: 1
+
+
+  bc_account:
+    widget: text_field
+    label: Account
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+  
+  working_dir:
+    label: "Working Directory"
+    data-filepicker: true
+    data-target-file-type: dirs  # Valid values are: files, dirs, or both
+    readonly: false
+    help: "Select your project directory; defaults to $HOME"
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+form:
+  - cluster
+  - bc_account
+  - bc_queue
+  - bc_num_hours
+  - working_dir
+  - bc_email_on_started

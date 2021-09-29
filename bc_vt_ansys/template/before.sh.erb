@@ -1,0 +1,32 @@
+# Export the module function if it exists
+if [ -z ${HOME+x} ];
+then
+    export HOME=$(echo ~)
+	source /etc/profile
+	source /etc/bashrc
+	source $HOME/.bashrc
+fi
+
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+module reset
+
+if [[ ! -z $SLURM_CLUSTER_NAME ]]; then 
+  echo running on $SLURM_CLUSTER_NAME
+  if [ $SLURM_CLUSTER_NAME = "infer" ]; then 
+    echo on infer, so loading CUDA
+    module --ignore-cache load CUDA
+  fi
+fi
+
+module load containers/singularity
+
+## some singularity cleanup
+unset SINGULARITY_TMPDIR
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+singularity run --cleanenv --nv \
+    --bind `pwd`:/cwd,/projects,/work/$USER,/cm \
+    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+

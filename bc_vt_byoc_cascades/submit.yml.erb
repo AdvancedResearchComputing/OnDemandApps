@@ -1,0 +1,10 @@
+---
+batch_connect:
+  template: basic
+script:
+  native:
+     - "--nodes=<%= bc_num_slots.blank? ? "1" : bc_num_slots.to_i %>"
+     - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
+     - "--time=<%= bc_num_hours + ":0:0" %>"
+     - "--account=<%= bc_account %>"
+     - "--partition=<%= queue %>"

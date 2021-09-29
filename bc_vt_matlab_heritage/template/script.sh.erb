@@ -1,0 +1,33 @@
+#!/bin/bash -l
+i
+<%- gpu = context.gpu_per_node.to_i > 0 ? true : false -%>
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+echo running on ${host}:${port}
+
+pwd
+
+#
+# Start MATLAB
+#
+
+# Load the required environment
+module load <%= context.version %>
+
+# Launch MATLAB
+<%- if gpu -%>
+  module load cuda
+  module list
+  set -x
+  matlab -desktop #-nosoftwareopengl
+<%- else -%>
+  module list
+  set -x
+  matlab -desktop
+<%- end -%>
+
+

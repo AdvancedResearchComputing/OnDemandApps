@@ -1,0 +1,18 @@
+#!/bin/bash -l
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+echo running on ${host}:${port}
+
+pwd
+
+module load <%= context.version %>
+module list
+set -x
+comsol -3drend sw
+
+wait $!
+

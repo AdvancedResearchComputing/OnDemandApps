@@ -1,0 +1,20 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+
+# override
+port_used () {
+  local port="${1#*:}"
+  local host=$((expr "${1}" : '\\(.*\\):' || echo "localhost") | awk 'END{print $NF}')
+  lsof -i :"${port}" &> /dev/null
+}
+export -f port_used
+
+# Find available port to run server on
+port=$(find_port ${host})
+
+export USERNAME=USER
+# Define a password and export it for RStudio authentication
+#password="$(create_passwd 16)"
+export password=$(openssl rand -base64 15)
+export PASSWORD=$password
+export RSTUDIO_PASSWORD=$PASSWORD

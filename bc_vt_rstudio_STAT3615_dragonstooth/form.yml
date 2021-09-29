@@ -1,0 +1,67 @@
+# Batch Connect app configuration file
+#
+---
+cluster: 'dragonstooth'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  # Set and load the  modules and environment that need to be loaded for Jupyter to run
+
+  bc_queue: 
+    value: interactive_q
+    help: |
+      - Queues available: interactive_q, normal_q, dev_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-4) -- after this time, your job will be killed
+    required: true
+    value: 1
+    min: 1
+    max: 4
+    step: 1
+
+  bc_num_slots: "1"
+
+  bc_account: 
+    value: "lrjohn-STAT3615-sp20"
+    help: For STAT 3615, use lrjohn-STAT3615-sp20
+
+  num_cores: 1
+##    widget: number_field
+##    label: Number of cores per node (min-1, max-24)
+##    value: 1
+##    min: 1
+##    max: 1
+##    step: 1
+
+#  reservation:
+#    value: "INC0383888"
+#    help: "Use INC0383888 for interactive_q ONLY"
+
+  Rversion: "3.6.1"
+
+  Rpackageset: "stat3615"
+##    widget: select
+##    label: "R package set"
+##    help: "This defines the default base packages you want in your R session. You can install more in your session."
+##    options:
+##      - [ "STAT3615 set", "stat3615" ]
+##      - [ "basic tidyverse",   "basic"  ]
+##      - [ "geoSpatial", "geospatial"  ]
+##      - [ "deepLearning", "deepLearning"  ]
+##      - [ "basic bio set", "bio"  ]
+
+
+
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+form:
+  - Rversion
+  - Rpackageset
+  - bc_account
+  - bc_queue
+  - bc_num_hours
+  - bc_email_on_started

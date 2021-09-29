@@ -1,0 +1,16 @@
+---
+name: STATA
+category: Interactive Apps
+subcategory: Cascades-DragonsTooth-Huckleberry
+role: batch_connect
+description: |
+  This app will launch [STATA], on one node.  Currently works on [Dragonstooth] and [Cascades].  For issues or requests, please submit a github issue for the [desktop OOD app] or the [desktop container].
+
+  [STATA]: https://www.stata.com
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]: https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+  [desktop container]: https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop

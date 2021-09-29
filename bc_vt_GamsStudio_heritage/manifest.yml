@@ -1,0 +1,16 @@
+---
+name: GAMS Studio
+category: Interactive Apps
+subcategory: Cascades-DragonsTooth-Huckleberry
+role: batch_connect
+description: |
+  This app will launch [GAMS Studio] in a container on one node on [Cascades] or [Dragonstooth].  For issues or requests, please submit a github issue for the [desktop OOD app].<P><HR/><P>
+
+  [GAMS Studio]: https://www.gams.com/latest/docs/T_STUDIO.html
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+

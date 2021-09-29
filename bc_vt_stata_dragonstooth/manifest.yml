@@ -1,0 +1,11 @@
+---
+name: Stata
+category: Interactive Apps
+subcategory: Dragonstooth
+role: batch_connect
+description: |
+  This app will launch a [Stata] GUI on the [Dragonstooth cluster]. You will be able to interact with the Stata GUI 
+  through a VNC session.
+
+  [Stata]: https://www.stata.com/
+  [Dragonstooth cluster]: https://www.arc.vt.edu/computing/cascades/

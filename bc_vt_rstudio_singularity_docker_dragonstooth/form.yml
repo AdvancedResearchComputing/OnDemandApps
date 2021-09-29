@@ -1,0 +1,78 @@
+# Batch Connect app configuration file
+#
+---
+cluster: 'dragonstooth'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+  # Set and load the  modules and environment that need to be loaded for Jupyter to run
+
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 72
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes (min-1, max-2)
+    required: true
+    value: 1
+    min: 1
+    max: 2
+    step: 1
+
+  bc_account:
+    widget: text_field
+    label: Account
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  num_cores:
+    widget: number_field
+    label: Number of cores per node (min-1, max-24)
+    value: 1
+    min: 1
+    max: 24
+    step: 1
+
+  Rversion:
+    widget: select
+    label: "R version"
+    options:
+      - [ "3.6.1", "3.6.1" ]
+      - [ "3.6.2", "3.6.2" ]
+
+  Rpackageset:
+    widget: select
+    label: "R package set"
+    help: "This defines the default base packages you want in your R session. You can install more in your session."
+    options:
+      - [ "basic tidyverse",   "basic"  ]
+      - [ "geoSpatial", "geospatial"  ]
+      - [ "Keras + Tensorflow 2.0", "keras"  ]
+      - [ "basic bio set", "bio"  ]
+      - [ "R plus Qiime2", "qiime2" ]
+
+
+# All of the attributes that make up the Dashboard form (in respective order),
+# and made available to the submit configuration file and the template ERB
+# files
+#
+form:
+  - Rversion
+  - Rpackageset
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - bc_email_on_started

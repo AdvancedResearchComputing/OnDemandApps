@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+export http_proxy="http://uaserve.cc.vt.edu:8080"; export https_proxy="http://uaserve.cc.vt.edu:8080"
+
+# Load the required environment
+module purge
+module load singularity/3.5.1
+#### make sure singularity directory is present
+if [ ! -d ${SINGULARITY_PULLDIR} ]; then
+   mkdir -vp ${SINGULARITY_PULLDIR}
+fi
+
+# Set working directory to users home directory
+cd "${HOME}"
+
+## form variables to work on
+##  - SingContainer
+##  - SingCache
+
+### pull container
+echo pulling <%= context.SingContainer %>
+echo value is <%= context.SingCache %>
+##echo testing <%= context.SingCache ? "0" : "--disable-cache" %>
+<%- if context.SingCache -%>
+  echo use cache -- actually need to fix this, disabling by default
+  echo running singularity pull --disable-cache --force <%= context.SingContainer %>
+  singularity pull --disable-cache --force <%= context.SingContainer %> 
+<%- else -%>
+  echo disable cache
+  echo running singularity pull --disable-cache --force <%= context.SingContainer %>
+  singularity pull --disable-cache --force <%= context.SingContainer %> 
+<%- end -%>
+echo done creating singularity image
+
+

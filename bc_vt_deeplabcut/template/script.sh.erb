@@ -1,0 +1,38 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+echo running on ${host}:${port}
+
+module load cuDNN/8.0.4.30-CUDA-11.1.1
+## fix up singularity 
+unset SINGULARITY_TMPDIR
+## this seems to be needed on a100s, not infer
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+#DIR="/work/${USER}/.conda/envs/OOD-DEEPLABCUT"
+#if [ ! -d $DIR ]; then
+  # need to install DEEPLABCUT
+#  echo "Installing DeepLabCut files in ${DIR}..."
+#  singularity exec --nv --bind=/apps,/cm,/work,/projects,`pwd`:/data /projects/arcsingularity/<%= context.Container %> bash /data/OOD-install.sh
+#  #singularity exec --nv --bind=/apps,/cm,/work,/projects,`pwd`:/data /fastscratch/rsettlag/deeplabcut-test-take4.sif bash /data/OOD-install.sh
+#fi
+
+singularity run --nv --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/apps,/cm,$TMPDIR:$TMPDIR,/projects:/projects,/work,`pwd`:/data \
+    /projects/arcsingularity/<%= context.Container %> 
+
+
+
+sleep 6000
+wait $!
+

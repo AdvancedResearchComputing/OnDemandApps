@@ -1,0 +1,10 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+
+module load singularity/3.5.1
+singularity run --cleanenv \
+    --bind `pwd`:/cwd,/groups,/work \
+    /groups/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+

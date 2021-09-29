@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Set working directory to PBS directory
+cd "${HOME}"
+chmod ug+x /home/omer95/ondemand/dev/bc_vt_GamsStudio_singularity_cascades/template/script.sh.erb
+
+# 
+# Launch Xfce Window Manager and Panel
+#
+
+(
+  unset XDG_RUNTIME_DIR
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+
+# Start GAMS Studio
+export http_proxy="http://uaserve.cc.vt.edu:8080"; export https_proxy="http://uaserve.cc.vt.edu:8080"
+echo starting singularity
+
+# Path to existing gams image
+gams_img="/groups/arcsingularity/gams_novnc_latest.sif"
+module load singularity/3.5.1
+
+# Script for setting path and launching gams : runScript.sh
+runScript="/home/omer95/ondemand/dev/bc_vt_GamsStudio_singularity_cascades/template/runScript.sh"
+
+# Binding the license directory into the container
+gamsDirBindPath="GAMS_ROOT_DIR/GAMS/gams33.2_linux_x64_64_sfx/:/GAMS_DIR/gams/gams33.2_linux_x64_64_sfx/"
+
+# Execute singularity container
+singularity exec --bind=/groups:/groups,/work:/work,$gamsDirBindPath $gams_img bash $runScript

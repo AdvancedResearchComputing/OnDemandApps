@@ -1,0 +1,25 @@
+#!/bin/bash -l
+unset XDG_RUNTIME_DIR
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+
+pwd
+
+
+echo running on ${host}:${port}
+
+module load VirtualGL/2.6.2-GCCcore-9.3.0
+module load ParaView/5.8.0-foss-2020a-Python-3.8.2-mpi
+##paraview
+
+export VGL_DISPLAY=$DISPLAY
+vglrun paraview
+
+walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
+sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
+echo converting walltime to sleeptime: $walltime is $sleeptime
+sleep $sleeptime

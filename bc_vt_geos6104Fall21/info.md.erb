@@ -1,0 +1,27 @@
+#### Launching your notebook, the first time can take a few minutes
+
++ This notebook is an extension to the [minimal jupyter stacks notebook](https://github.com/jupyter/docker-stacks/tree/481bafbda7c3a81b16a1c64d813ad51412ac78aa/minimal-notebook) with additional packages listed [here](https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/blob/master/bc_vt_geos6104fall21/README.md#Packages-made-available-under-this-application).
+
+## Git config:
+1. create a new empty repo on [GitHub](https://github.com)  
+2. assuming your repo user id is YOUR pid and the repo name is geos6104:  
+click on the blue host link on the main app page, something like `>_tc123`, then type the following in the terminal
+
+---
+```
+  git clone git@github.com:pid/geos6104.git  
+  cd geos6104  
+  echo "# place for all my awesome GEOS6104 homework" >readme.md  
+  git add readme.md  
+  git commit -m "my first commit to add a readme"  
+  git push  
+```
+
+---
+#### You MAY need to do this ONCE after doing the clone above to finish the setup
+```
+git config --global user.email "you@example.com"  
+git config --global user.name "Your GitHub USER Name" 
+``` 
+
+

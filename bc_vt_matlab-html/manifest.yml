@@ -1,0 +1,6 @@
+---
+name: Matlab-html
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch an interactive Matlab session via HTML on one node.

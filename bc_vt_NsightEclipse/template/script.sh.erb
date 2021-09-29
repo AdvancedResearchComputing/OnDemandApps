@@ -1,0 +1,43 @@
+#!/bin/bash
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source ./connection.rc
+
+unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+module load containers/singularity
+
+echo loading cuda toolkit version <%= context.ide_version%>
+module load cuda<%= context.ide_version%>/toolkit
+echo loaded cuda toolkit 
+
+sleep 2
+ls /tmp/.X11-unix
+echo starting Nsight Eclipse container
+
+echo DISPLAY:$DISPLAY
+echo USER:$USER
+
+
+# Path to Eclipse TC Image
+eclipse_img='/projects/arcsingularity/ood-nsight_July2021.sif'
+echo eclipseImagePath:$eclipse_img
+module list 
+env
+echo cuda path: $CUDA_PATH
+SINGULARITYENV_CUDA_PATH=$CUDA_PATH
+SINGULARITYENV_CUDA_ROOT=$CUDA_ROOT
+SINGULARITYENV_CUDA_CMLOCAL_ROOT=$CUDA_CMLOCAL_ROOT
+SINGULARITYENV_CUDA_INSTALL_PATH=$CUDA_INSTALL_PATH
+SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+SINGULARITYENV_CUDA_HOME=$CUDA_HOME
+SINGULARITYENV_CUDA_INC_PATH=$CUDA_INC_PATH
+SINGULARITYENV_CUDA_SDK=$CUDA_SDK
+SINGULARITYENV_LIBRARY_PATH=$LIBRARY_PATH
+echo "singularity exec --env DISPLAY=$DISPLAY --env CUDA_PATH=$CUDA_PATH --writable-tmpfs --bind=/cm/shared:/cm/shared,/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work $eclipse_img  /usr/bin/nsight"
+
+singularity exec --env DISPLAY=$DISPLAY --env CUDA_PATH=$CUDA_PATH --writable-tmpfs --bind=/cm/shared:/cm/shared,/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work $eclipse_img  /usr/bin/nsight
+wait $!

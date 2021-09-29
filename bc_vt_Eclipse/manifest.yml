@@ -1,0 +1,15 @@
+---
+name: Eclipse
+category: IDE
+role: batch_connect
+description: |
+  This app will launch [Eclipse] on [TinkerCliffs] and [Infer].
+
+  [Eclipse]: https://www.eclipse.org/eclipseide/      
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+

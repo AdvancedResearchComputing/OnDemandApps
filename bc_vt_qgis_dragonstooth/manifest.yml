@@ -1,0 +1,11 @@
+---
+name: QGIS
+category: Interactive Apps
+subcategory: Dragonstooth
+role: batch_connect
+description: |
+  This app will launch a [QGIS] GUI on the [Dragonstooth cluster]. You will be able to interact with the QGIS GUI
+  through a VNC session.
+
+  [QGIS]: https://qgis.org/en/site/
+  [Dragonstooth cluster]: https://www.arc.vt.edu/dragonstooth

@@ -1,0 +1,10 @@
+# Wait for the LaBB-CAT to start
+echo "Waiting for LaBB-CAT to open port ${port}..."
+if wait_until_port_used "${host}:${port}" 2400; then
+  echo "Discovered LaBB-CAT listening on port ${port}!"
+  sleep 2
+else
+  echo "Timed out waiting for LaBB-CAT to open port ${port}!"
+  clean_up 1
+fi
+sleep 2

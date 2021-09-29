@@ -1,0 +1,6 @@
+---
+name: Jupyter Notebook for ICE 3434 Fall 2021
+category: Class Apps
+role: batch_connect
+description: |
+        Launch a Jupyter Notebook on Cascades/Dragonstooth.

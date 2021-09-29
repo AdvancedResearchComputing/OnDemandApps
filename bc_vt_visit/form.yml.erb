@@ -1,0 +1,67 @@
+# Batch Connect app configuration file
+---
+cluster: 
+  - 'tinkercliffs'
+  - 'infer'
+
+# Define attribute values that aren't meant to be modified by the user within
+# the Dashboard form
+attributes:
+
+  bc_queue:
+    help: |
+      - For faster, shorter jobs, try dev_q.
+
+  bc_num_hours:
+    label: Number of hours (min-1, max-48)
+    required: true
+    value: 1
+    min: 1
+    max: 48
+    step: 1
+
+  bc_num_slots:
+    label: Number of nodes
+    required: true
+    value: 1
+    min: 1
+    max: 1
+    step: 1
+
+  bc_account:
+    widget: text_field
+    label: Allocation
+    value: ""
+    help: |
+       - The allocation you would like to use for SLURM.
+
+  num_cores: 
+    widget: number_field
+    label: Number of cores per node (min-1, max-128)
+    value: 16
+    min: 1
+    max: 128
+    step: 1
+
+  version:
+    widget: select
+    label: "VisIT version"
+    help: "This defines the version of VisIT you want to load."
+    options:
+    <%- Dir.glob('/projects/arcsingularity/ood-visit*sif').each do |f| -%>
+      <%- sif = f.sub('/projects/arcsingularity/','') -%>
+      <%- Vver = f.sub('/projects/arcsingularity/','').sub('ood-visit_','').chomp(".sif") -%>
+      - [ "<%= Vver %>", "<%= sif %>" ]
+    <%- end -%>
+
+
+form:
+  - bc_account
+  - reservation
+  - bc_queue
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - version
+  - bc_vnc_resolution
+  - bc_email_on_started

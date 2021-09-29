@@ -1,0 +1,28 @@
+#!/bin/bash -l
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+echo running on ${host}:${port}
+
+pwd
+
+# Load the required enviornment
+module load <%= context.version %>
+module list
+set -x
+
+# Launch stata
+# note that xstata-mp doesn't block so we have to watch it
+xstata-mp
+
+# Get the PID of the last xstata-mp process started that I own
+stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
+# As long as the PID directory exists we wait
+while [[ -d "/proc/$stata_pid" ]]; do
+  sleep 1
+done
+##wait $!
+

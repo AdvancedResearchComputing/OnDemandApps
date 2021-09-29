@@ -1,0 +1,10 @@
+---
+name: BYO-Container
+category: Interactive Apps
+subcategory: Cascades
+role: batch_connect
+description: |
+  This app will build a **user** [Singularity container] GUI on the [Cascades cluster]. The app will exit once the build is complete.
+
+  [Singularity container]: https://sylabs.io/docs/
+  [Cascades cluster]: http://arc.vt.edu/computing/cascades/

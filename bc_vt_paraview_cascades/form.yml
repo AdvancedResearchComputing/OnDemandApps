@@ -1,0 +1,58 @@
+---
+cluster: "cascades"
+form:
+  - bc_queue
+  - bc_account
+  - reservation
+  - version
+  - bc_num_hours
+  - bc_num_slots
+  - num_cores
+  - gpu_per_node
+  - bc_vnc_resolution
+  - bc_email_on_started
+attributes:
+  bc_queue:
+    help: |
+      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q
+
+  num_cores:
+    widget: "number_field"
+    label: "Number of cores"
+    value: 1
+    help: |
+      Number of cores on node type (4 GB per core unless requesting whole
+      node). Leave blank if requesting full node.
+    min: 0
+    max: 48
+    step: 1
+    id: 'num_cores'
+
+  bc_num_slots: "1"
+  gpu_per_node:
+    widget: number_field
+    label: Number of GPUs per node (min-0, max-2)
+    value: 0
+    min: 0
+    max: 2
+    step: 1
+    help: |
+       - If requesting GPU nodes, you must enter a GPU-enabled Partition above or the job will fail.
+
+  bc_vnc_resolution:
+    required: true
+
+  bc_account:
+    label: "Account"
+    help: "SLURM account to pull core-hours from."
+
+  reservation:
+    label: "Reservation"
+    help: "(Leave blank if you are not targeting a particular reservation.)"
+
+  version:
+    widget: select
+    label: "ParaView version."
+    help: "This defines the version of ParaView  you want to load."
+    options:
+      - [ "5.6.0", "ParaView/5.6.0" ]

@@ -1,0 +1,10 @@
+batch_connect:
+  template: vnc
+script:
+  native:
+    - "--nodes=1"
+#    - "--cpus-per-task=32" ## changing this to node exclusive for portability
+    - "--exclusive"
+    - "--time=<%= bc_num_hours + ":0:0" %>"
+    - "--reservation=<%= reservation %>"
+    - "--account=<%= bc_account %>"

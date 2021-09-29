@@ -1,0 +1,47 @@
+#!/bin/bash -l
+
+echo "start of script.sh"
+
+unset XDG_RUNTIME_DIR
+
+# Benchmark info
+#
+echo "Hostname -- "
+hostname
+
+echo "TIMING -- Starting main script at: $(date)"
+
+# Set working directory to home directory
+#cd "${HOME}"
+
+echo starting singularity
+echo running on ${host}:${port}
+
+module load containers/singularity
+
+unset SINGULARITY_TMPDIR
+
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+DIR="~/.conda/envs/OOD-GEOFALL"
+
+if [ ! -d "$DIR" ]; then
+  # need to install CONDA PACKAGES
+  mkdir -p $DIR
+  echo "Installing conda packages files in ${DIR} ..."
+  singularity exec --nv --writable-tmpfs --bind=${TMPDIR}:/tmp,`pwd`/install_script.sh:/install.sh,`pwd`/env.yaml:/env.yaml /projects/arcsingularity/AMD/geo_fall21_latest.sif bash /install.sh
+fi
+
+# Benchmark info
+echo "TIMING - Starting jupyter at: $(date)"
+
+# Launch the Jupyter Notebook Server
+set -x
+#
+#
+pwd
+module list
+singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects/geos6104fall21/:/projects,/work:/work \
+  /projects/arcsingularity/AMD/geo_fall21_latest.sif bash ./run_script.sh
+
+echo "end of script.sh"

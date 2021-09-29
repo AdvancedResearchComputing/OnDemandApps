@@ -1,0 +1,8 @@
+---
+name: Jupyter Notebook for GEOS6104 Fall 2021
+category: Class Apps
+role: batch_connect
+description: |
+        Launch a Jupyter Notebook on TinkerCliffs and optionally activate a Conda environment.
+
+

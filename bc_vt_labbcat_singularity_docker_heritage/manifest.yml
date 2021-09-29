@@ -1,0 +1,7 @@
+---
+name: LaBB-CAT
+category: Interactive Apps
+subcategory: Cascades-DragonsTooth-Huckleberry
+role: batch_connect
+description: |
+  This app will launch LaBB-CAT in a container on a compute node.

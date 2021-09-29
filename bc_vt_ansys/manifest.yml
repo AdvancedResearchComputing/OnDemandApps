@@ -1,0 +1,15 @@
+---
+name: Ansys Workbench
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch Ansys in VNC Server in a container on one node.  This software is licensed.  You must first be added to the licensed user list, for instructions see [here].  The container uses a Singularity image.  For issues or requests, please submit a github issue for the [desktop OOD app].<BR>NOTE: If you need the module system in the terminal ssh to localhost.<BR><P><HR/><P>
+
+  [here]: https://arc.vt.edu/userguide/licensed_software/
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+
