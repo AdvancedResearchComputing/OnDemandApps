@@ -1,0 +1,57 @@
+#!/bin/bash -l
+
+echo "start of script.sh"
+
+unset XDG_RUNTIME_DIR
+
+# Benchmark info
+#
+echo "Hostname -- "
+hostname
+
+echo "TIMING -- Starting main script at: $(date)"
+
+# Set working directory to home directory
+#cd "${HOME}"
+
+echo starting singularity
+echo running on ${host}:${port}
+
+echo "cluster: <%= context.cluster %>"
+if [ <%= context.cluster %> = 'cascades' ] || [ <%= context.cluster %> = 'dragonstooth' ] 
+then 
+  module load singularity/3.3.0
+  export sif_file=/groups/arcsingularity/<%= context.Container %>
+else 
+  module load containers/singularity
+  export sif_file=/projects/arcsingularity/AMD/<%= context.Container %>
+fi
+
+
+module list
+unset SINGULARITY_TMPDIR
+
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+DIR="~/.conda/envs/OOD-CONDAENV"
+
+if [ ! -d "$DIR" ]; then
+  # need to install CONDA PACKAGES
+  mkdir -p $DIR
+  echo "Installing conda packages files in ${DIR} ..."
+  singularity exec --nv --writable-tmpfs --bind=${TMPDIR}:/tmp,`pwd`/install_script.sh:/install.sh,`pwd`/env.yaml:/env.yaml $sif_file bash /install.sh
+fi
+
+# Benchmark info
+echo "TIMING - Starting jupyter at: $(date)"
+
+# Launch the Jupyter Notebook Server
+set -x
+#
+#
+pwd
+
+singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects,/work:/work \
+$sif_file bash ./run_script.sh
+
+echo "end of script.sh"

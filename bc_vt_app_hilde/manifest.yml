@@ -1,0 +1,7 @@
+---
+name: Jupyter Notebook for Fall 2021
+category: Interactive Apps
+subcategory: 'Cascades'
+role: batch_connect
+description: |
+        Launch a Jupyter Notebook on Cascades/Dragonstooth.
