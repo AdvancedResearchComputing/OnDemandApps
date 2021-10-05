@@ -1,54 +1,18 @@
-# Batch Connect - Example Jupyter Notebook Server
+# Example [Jupyter Lab](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html) Server
 
 An example Batch Connect app that launches a Jupyter Notebook server within a
 batch job.
 
-## Prerequisites
+JupyterLab also offers a unified model for viewing and handling data formats. JupyterLab understands many file formats (images, CSV, JSON, Markdown, PDF, Vega, Vega-Lite, etc.) and can also display rich kernel output in these formats. See File and Output Formats for more information.
 
-This Batch Connect app requires the following software be installed on the
-**compute nodes** that the batch job is intended to run on (**NOT** the
-OnDemand node):
 
-- [Jupyter Notebook](http://jupyter.readthedocs.io/en/latest/) 4.2.3+ (earlier
-  versions are untested but may work for you)
-- [OpenSSL](https://www.openssl.org/) 1.0.1+ (used to hash the Jupyter Notebook
-  server password)
-- [Lmod](https://www.tacc.utexas.edu/research-development/tacc-projects/lmod)
-  6.0.1+ or any other `module purge` and `module load <modules>` based CLI
-  used to load appropriate environments within the batch job before launching
-  the Jupyter Notebook server.
+### OOD User Guide:
+Step 1 
+Gather your requirement, You will need to provide: 
+- No of cpus you need 
+- Your allocation. 
+> For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
-## Install
+Want to install this app on your OOD System ? 
 
-## Development Installation
-
-### Git clone repository
-```bash
-   cd /home/<user>/ondemand/dev
-   $git clone git@github.com:rsettlage/ondemand2.git
-```
-
-## System Installation
-```bash
-   cd /var/www/ood/apps/sys
-   $git clone git@github.com:rsettlage/ondemand2.git
-```
-
-### Packages made available under this application
-
-``` sh
-RUN conda -y -c conda-forge numpy
- 'jupyterlab' \
- 'matplotlib' \
- 'scipy'\
- 'scikit-learn'
- 'folium' \
- 'more-itertools'
- 'pandas'\
- 'networkx' \
- 'cftime' \
- 'seaborn' 
- 
-RUN conda config --add channels https://conda.anaconda.org/gurobi
-RUN conda install gurobi
-```
+Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_ise3434/DevGuide.md)
