@@ -8,3 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Initial release!
 
+## 1.1 - 2021-10-05
+### Added
+- DevGuide.md
+- Dockerfile
+### Modifiled
+- README.md - To provide interactive user guide.
+- form.js/form.yml.erb - Clean up
+- Info.md
+

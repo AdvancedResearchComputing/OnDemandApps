@@ -40,7 +40,7 @@ OnDemand node):
    git clone git@github.com:rsettlage/ondemand2.git
 ```
 
-### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_ise3434):
+### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_ise3434) or [Dockerfile](./DockerFiles/Dockerfile):
 
 ``` sh
 RUN conda -y -c conda-forge numpy
