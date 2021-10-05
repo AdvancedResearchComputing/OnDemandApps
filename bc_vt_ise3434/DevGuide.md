@@ -31,13 +31,13 @@ OnDemand node):
 ### Git clone repository
 ```bash
    cd /home/<user>/ondemand/dev
-   git clone git@github.com:rsettlage/ondemand2.git
+   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
 
 ### System Installation
 ```bash
    cd /var/www/ood/apps/sys
-   git clone git@github.com:rsettlage/ondemand2.git
+   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
 
 ### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_ise3434) or [Dockerfile](./DockerFiles/Dockerfile):
