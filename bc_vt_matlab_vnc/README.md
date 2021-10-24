@@ -30,9 +30,11 @@ OnDemand node):
 Gather your requirement, You will need to provide: 
 - Account
 - Reservation (optional)
+- Matlab version (optional)
 - No of hours  
 - No of CPUs you need
 - No of GPUs you need
+
 > Note: partition of GPU may change based on different clusters use sinfo on cluster or else refer documentation links below  
 - Cluster
 > For details of VT cluster [Read More.](https://arc-rtd.readthedocs.io/en/latest/resources/compute.html)
@@ -40,24 +42,27 @@ Gather your requirement, You will need to provide:
 
 #### Step 2 
 Open you on demand portal and click the app
-![image](https://user-images.githubusercontent.com/4628915/136077633-50ea6952-399f-494d-8ef9-244ed2d37fcd.png)
+![app](https://user-images.githubusercontent.com/4628915/138606146-5d24312f-38d5-4d72-9302-b40738b8b87b.png)
+
 
 #### Step 3 
 Fill in the required details 
-![image](https://user-images.githubusercontent.com/4628915/136077790-7d857c16-c2f9-4cfa-9d02-a3b8d1f62fa0.png)
+![image](https://user-images.githubusercontent.com/4628915/138606170-bdd126fd-7aa7-448d-9ac9-201fec27eb33.png)
+
 
 #### Step 4 
 
-Click Launch and your Jupyter Lab will be ready in few minutes: 
+Click Launch and your Matlab Lab will be ready in few minutes: 
 
-![image](https://user-images.githubusercontent.com/4628915/136078123-747b32f3-c117-4113-a46a-e1d7f380d397.png)
+![image](https://user-images.githubusercontent.com/4628915/138606222-c5ac5de6-9aa3-4bb6-a18d-00611d2d3dba.png)
+
 
 #### Step 5 
 All your running jobs are available under "My Interactive Sessions" :
 
-![image](https://user-images.githubusercontent.com/4628915/136078473-372c3fb1-892c-4a74-ae00-91cd1b7e2868.png)
+![image](https://user-images.githubusercontent.com/4628915/138606662-31e419c8-5226-4cf8-893c-c9bd579f0130.png)
 
 
 Want to install this app on your OOD System ? 
 
-Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_ise3434/DevGuide.md)
+Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_Vt_matlab_vnc/DevGuide.md)
