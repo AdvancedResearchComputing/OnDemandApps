@@ -5,7 +5,7 @@ The repo follows new nomenclature, directory structure and support for CI using 
 ## Directory Structure 
 
 Following is the description of directory structure, it is important to note that deviation with this structure may result in CI builds to break. For more info in this regard we request you to read [CI.md](./CI.md) 
-- 
+ 
 ```
 - app_root
     - Dockerfiles
