@@ -2,7 +2,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based HTML.
+An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on VNC environment.
 
 ## Prerequisites
 
@@ -28,8 +28,12 @@ OnDemand node):
 
 #### Step 1 
 Gather your requirement, You will need to provide: 
-- No of cpus you need  
+- Account
+- Reservation (optional)
 - No of hours  
+- No of CPUs you need
+- No of GPUs you need
+> Note: partition of GPU may change based on different clusters use sinfo on cluster or else refer documentation links below  
 - Cluster
 > For details of VT cluster [Read More.](https://arc-rtd.readthedocs.io/en/latest/resources/compute.html)
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
