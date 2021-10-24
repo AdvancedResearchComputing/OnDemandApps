@@ -1,0 +1,6 @@
+---
+name: MATLAB
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch an interactive MATLAB (version R2021a) session via HTML on one node.  <br> `NOTE:` For a list of available queues and associated node attributes, check out the **RTD** [here](https://arc-rtd.readthedocs.io/en/latest/resources.html)

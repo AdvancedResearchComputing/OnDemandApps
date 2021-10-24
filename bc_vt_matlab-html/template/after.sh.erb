@@ -1,0 +1,9 @@
+# Wait for the Matlab to start
+echo "Waiting for Matlab to open port ${port}..."
+if wait_until_port_used "${host}:${port}" 2400; then
+  echo "Discovered Matlab listening on port ${port}!"
+else
+  echo "Timed out waiting for Matlab to start port ${port}!"
+  clean_up 1
+fi
+sleep 2

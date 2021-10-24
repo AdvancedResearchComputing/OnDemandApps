@@ -1,0 +1,26 @@
+echo starting before
+sleep 2
+
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+module list
+
+# override
+port_used () {
+  local port="${1#*:}"
+  local host=$((expr "${1}" : '\\(.*\\):' || echo "localhost") | awk 'END{print $NF}')
+  lsof -i :"${port}" &> /dev/null
+}
+export -f port_used
+
+# Find available port to run server on
+port=$(find_port ${host})
+
+#### create a resoure file matlab.rc
+echo export MWI_APP_PORT=${port} >matlab.rc
+echo export MWI_BASE_URL="/matlab" >>matlab.rc
+echo export MATLAB_LOG_DIR=/tmp >>matlab.rc
+echo export TMPDIR="/tmp" >>matlab.rc
+echo export MWI_EXT_URL="ood.arc.vt.edu" >>matlab.rc
+echo export MLM_LICENSE_FILE=/opt/matlab/licenses/network.lic >>matlab.rc
+

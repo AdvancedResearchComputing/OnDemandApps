@@ -1,0 +1,16 @@
+---
+name: MATLAB via VNC
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch [MATLAB] on [TinkerCliffs] and [Infer] -- coming soon.  For issues or requests, please submit a github issue for the [MATLAB OOD app] or [desktop OOD app].<P><HR/><P>
+
+  [Matlab OOD app]: https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_matlab
+  [Matlab]: https://www.mathworks.com/products/matlab.html
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+
