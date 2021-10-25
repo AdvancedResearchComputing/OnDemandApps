@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=session-manager=export
+Comment=for ICE cleanup
+Exec=bash -c 'echo export SESSION_MANAGER=$SESSION_MANAGER > "/TMPDIR/session.rc"'
+Terminal=true
+Type=Application
