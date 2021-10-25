@@ -1,36 +1,58 @@
 
-## Install
+# Batch Connect - Matlab (VNC based) app 
 
-Use git to clone this app and checkout the desired branch/version you want to
-use:
+An example Batch Connect app that launches a Matlab application within a
+batch job.
 
+## Prerequisites
 
-XXXXXXXXXXXXXXXXXXX Ayush - fix me
+This Batch Connect app requires the following software be installed on the
+**compute nodes** that the batch job is intended to run on (**NOT** the
+OnDemand node):
 
-```sh
-scl enable git19 -- git clone <repo>
-cd <dir>
-scl enable git19 -- git checkout <tag/branch>
+- [OpenSSL](https://www.openssl.org/) 1.0.1+ (used to hash the Jupyter Notebook
+  server password)
+- [Lmod](https://www.tacc.utexas.edu/research-development/tacc-projects/lmod)
+  6.0.1+ or any other `module purge` and `module load <modules>` based CLI
+  used to load appropriate environments within the batch job before launching
+  the Jupyter Notebook server.
+- [Singularity](https://sylabs.io/guides/3.0/user-guide/installation.html) Singularity is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible. ... Your container is a single file, and you don't have to worry about how to install all the software you need on each different operating system and system.
+
+## Downloading and building docker image
+``` sh 
+    singularity pull matlab.sif docker://vtarc/bc_vt_matlab_html:latest
 ```
 
-You will not need to do anything beyond this as all necessary assets are
-installed. You will also not need to restart this app as it isn't a Passenger
-app.
+- Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/233185f8f1e7115bde8129d4356860056754f6f4/bc_vt_matlab-html/template/script.sh.erb#L31)
 
-To update the app you would:
 
-```sh
-cd <dir>
-scl enable git19 -- git fetch
-scl enable git19 -- git checkout <tag/branch>
+## Development Installation
+
+
+#### Git clone repository
+```bash
+   cd /home/<user>/ondemand/dev
+   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
 
-Again, you do not need to restart the app as it isn't a Passenger app.
+### System Installation
+```bash
+   cd /var/www/ood/apps/sys
+   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
+```
+> Make sure to give executable permissions for *image file*
+### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_matlab_html) or [Dockerfile](./DockerFiles/Dockerfile):
+
+``` sh
+ matlab
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/OSC/bc_osc_rstudio_server/fork )
+1. Fork it 
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+---
