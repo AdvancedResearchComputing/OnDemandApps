@@ -42,7 +42,7 @@ Gather your requirement, You will need to provide:
 
 #### Step 2 
 Open you on demand portal and click the app
-![app](https://user-images.githubusercontent.com/4628915/138606146-5d24312f-38d5-4d72-9302-b40738b8b87b.png)
+![image](https://user-images.githubusercontent.com/4628915/138629973-66a6ae83-36b3-44a8-adad-6f5b77ded4c0.png)
 
 
 #### Step 3 
