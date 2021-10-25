@@ -39,10 +39,8 @@ sudo singularity build ubuntu-xfce.sif Singularity.def
 - Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/4780885fd1b22b98cc55ff5cc9728e636429bc1d/bc_vt_desktop/template/before.sh.erb#L28)
 
 
-## Development Installation
+### Development Installation
 
-
-#### Git clone repository
 ```bash
    cd /home/<user>/ondemand/dev
    git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git

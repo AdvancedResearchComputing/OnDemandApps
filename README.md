@@ -1,6 +1,11 @@
+
 # OnDemandApps
 New repository for ondemand Apps. 
 The repo follows new nomenclature, directory structure and support for CI using github actions. 
+
+---
+[![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Directory Structure 
 
