@@ -25,10 +25,8 @@ OnDemand node):
 - Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/f7f8ea6bcbe66d191b8766eb3be9d05af312460d/bc_vt_ise3434/template/script.sh.erb#L27)
 
 
-## Development Installation
+### Development Installation
 
-
-### Git clone repository
 ```bash
    cd /home/<user>/ondemand/dev
    git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
@@ -39,6 +37,8 @@ OnDemand node):
    cd /var/www/ood/apps/sys
    git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
+
+- Make necessary description changes to **[manifest.yml](./manifest.yml)**
 
 ### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_ise3434) or [Dockerfile](./DockerFiles/Dockerfile):
 

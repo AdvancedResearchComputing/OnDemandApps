@@ -54,6 +54,7 @@ sudo singularity build ubuntu-xfce.sif Singularity.def
 > Make sure to give executable permissions for *image file*
 
 
+- Make necessary description changes to **[manifest.yml](./manifest.yml)**
 ## Contributing
 
 1. Fork it 
