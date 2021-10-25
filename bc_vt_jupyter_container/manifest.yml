@@ -1,0 +1,7 @@
+---
+name: Jupyter Notebook --Container
+category: Interactive Apps
+subcategory: 'TinkerCliffs'
+role: batch_connect
+description: |
+        WORK IN PROGRESS<br>Launch a Jupyter Notebook on TinkerCliffs and optionally activate a Conda environment.

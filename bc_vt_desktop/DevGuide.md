@@ -23,7 +23,13 @@ OnDemand node):
 Building singularity image requires elevated priviledges which may not be feasible on production environments thus we provide prebuilt image file as release artefacts.
 
 ``` sh 
-singularity pull <url>
+singularity pull --arch amd64 library://ayushchatur/default/bc_vt_desktop:v2.0 
+```
+
+or Pull by unique ID (reproducible even if tags change) 
+
+``` sh 
+singularity pull library://ayushchatur/default/bc_vt_desktop:sha256.b3d4f08674eb7c205c154c700b91cd667c93d73da02c7d59dedb198c1e2e7b48 
 
 ```
 
@@ -31,6 +37,7 @@ In case you have priviledged access you may build with reciepe as below
 
 ``` sh 
 git clone https://github.com/AdvancedResearchComputing/OnDemandApps.git
+
 cd Singularityfiles
 sudo singularity build ubuntu-xfce.sif Singularity.def
 
@@ -42,14 +49,14 @@ sudo singularity build ubuntu-xfce.sif Singularity.def
 ### Development Installation
 
 ```bash
-   cd /home/<user>/ondemand/dev
-   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
+cd /home/<user>/ondemand/dev
+git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
 
 ### System Installation
 ```bash
-   cd /var/www/ood/apps/sys
-   git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
+cd /var/www/ood/apps/sys
+git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
 > Make sure to give executable permissions for *image file*
 
