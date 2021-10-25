@@ -2,7 +2,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on VNC environment.
+An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on HTML based.
 
 ## Prerequisites
 
