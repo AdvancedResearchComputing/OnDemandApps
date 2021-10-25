@@ -1,5 +1,5 @@
 
-# Batch Connect - Matlab (VNC based) app 
+# Batch Connect - Matlab (HTML based) app 
 
 An example Batch Connect app that launches a Matlab application within a
 batch job.
@@ -23,7 +23,7 @@ OnDemand node):
     singularity pull matlab.sif docker://vtarc/bc_vt_matlab_html:latest
 ```
 
-- Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/233185f8f1e7115bde8129d4356860056754f6f4/bc_vt_matlab_vnc/template/script.sh.erb#L31)
+- Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/233185f8f1e7115bde8129d4356860056754f6f4/bc_vt_matlab-html/template/script.sh.erb#L31)
 
 
 ## Development Installation
@@ -54,6 +54,5 @@ OnDemand node):
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
-
 
 ---
