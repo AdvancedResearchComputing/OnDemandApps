@@ -47,20 +47,19 @@ Open you on demand portal and click the app
 
 #### Step 3 
 Fill in the required details 
-![image](https://user-images.githubusercontent.com/4628915/138606170-bdd126fd-7aa7-448d-9ac9-201fec27eb33.png)
+![image](https://user-images.githubusercontent.com/4628915/138628533-605d4843-1fd0-416f-9e9f-c2d943b2415f.png)
+
 
 
 #### Step 4 
 
 Click Launch and your Matlab Lab will be ready in few minutes: 
-
-![image](https://user-images.githubusercontent.com/4628915/138606222-c5ac5de6-9aa3-4bb6-a18d-00611d2d3dba.png)
-
+![image](https://user-images.githubusercontent.com/4628915/138628674-03b274f1-f73a-4d62-8c6f-8a081e50d684.png)
 
 #### Step 5 
 All your running jobs are available under "My Interactive Sessions" :
 
-![image](https://user-images.githubusercontent.com/4628915/138606662-31e419c8-5226-4cf8-893c-c9bd579f0130.png)
+![image](https://user-images.githubusercontent.com/4628915/138629267-4b439c14-6e13-4660-8fbf-5041fab6aaaf.png)
 
 
 Want to install this app on your OOD System ? 
