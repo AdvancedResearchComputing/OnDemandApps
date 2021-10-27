@@ -1,5 +1,5 @@
 
-# Batch Connect - Matlab (HTML based) app 
+# Batch Connect - Matlab app 
 
 An example Batch Connect app that launches a Matlab application within a
 batch job.
