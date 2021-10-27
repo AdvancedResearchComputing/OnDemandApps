@@ -1,8 +1,8 @@
-# Batch Connect - MATLAB via HTML
+# Batch Connect - MATLAB
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on HTML based.
+An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on HTML based which has its own advantages in terms of portability 
 
 ## Prerequisites
 
@@ -62,6 +62,18 @@ All your running jobs are available under "My Interactive Sessions" :
 ![image](https://user-images.githubusercontent.com/4628915/138629267-4b439c14-6e13-4660-8fbf-5041fab6aaaf.png)
 
 
+
+![image](https://user-images.githubusercontent.com/4628915/138981967-b93fe064-78f4-48a4-b8e3-ea9a97bafd90.png)
+
+If you selected GPU partition You can also verify device with simple one liner: 
+
+``` sh
+gpuDeviceCount("available")
+```
+
+![image](https://user-images.githubusercontent.com/4628915/138982131-19b35ca6-02d8-481b-9bce-eabcda367ff1.png)
+ 
+
 Want to install this app on your OOD System ? 
 
-Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_matlab-html/DevGuide.md)
+Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_matlab_html/DevGuide.md)
