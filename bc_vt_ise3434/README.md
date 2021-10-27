@@ -37,4 +37,4 @@ All your running jobs are available under "My Interactive Sessions" :
 
 Want to install this app on your OOD System ? 
 
-Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_ise3434/DevGuide.md)
+Follow our [Dev Guide](./DevGuide.md)
