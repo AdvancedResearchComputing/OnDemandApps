@@ -61,7 +61,7 @@ All your running jobs are available under "My Interactive Sessions" :
 
 ![image](https://user-images.githubusercontent.com/4628915/138629267-4b439c14-6e13-4660-8fbf-5041fab6aaaf.png)
 
-
+Click `Connect to Matlab` button
 
 ![image](https://user-images.githubusercontent.com/4628915/138981967-b93fe064-78f4-48a4-b8e3-ea9a97bafd90.png)
 
