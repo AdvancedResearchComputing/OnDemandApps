@@ -1,5 +1,17 @@
-echo starting before
-sleep 2
+echo get env in before, then hack it to make sure
+env >env.txt
+
+if [ -z ${HOME+x} ];
+then
+    export HOME=$(echo ~)
+	source /etc/profile
+	source /etc/bashrc
+	source $HOME/.bashrc
+fi
+
+echo #####################################
+echo starting before.sh
+echo #####################################
 
 # Export the module function if it exists
 [[ $(type -t module) == "function" ]] && export -f module
