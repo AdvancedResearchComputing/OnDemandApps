@@ -44,7 +44,7 @@ OnDemand node):
 
 - Make necessary description changes to **[manifest.yml](./manifest.yml)**
 
-### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_matlab_html) or [Dockerfile](./DockerFiles/Dockerfile):
+### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_matlab_html) or [Dockerfile](./Dockerfiles/Dockerfile):
 
 ``` sh
  matlab
