@@ -8,7 +8,7 @@ JupyterLab also offers a unified model for viewing and handling data formats. Ju
 
 ### OOD User Guide:
 #### Step 1 
-Gather your requirement, You will need to provide: 
+Gather your requirements, You will need to provide: 
 - No of cpus you need  
 - No of hours  
 - Cluster
@@ -16,7 +16,7 @@ Gather your requirement, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open you on demand portal and click the app
+Open your on demand portal and click the app
 ![image](https://user-images.githubusercontent.com/4628915/136077633-50ea6952-399f-494d-8ef9-244ed2d37fcd.png)
 
 #### Step 3 
