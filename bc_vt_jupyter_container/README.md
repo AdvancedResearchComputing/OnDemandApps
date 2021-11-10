@@ -23,7 +23,7 @@ OnDemand node):
 
 
 #### Step 1 
-Gather your requirement, You will need to provide: 
+Gather your requirements, You will need to provide: 
 - Account
 - Reservation (optional)
 - Matlab version (optional)
@@ -37,7 +37,7 @@ Gather your requirement, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open you on demand portal and click the app
+Open your on demand portal and click the app
 ![image](https://user-images.githubusercontent.com/4628915/138629973-66a6ae83-36b3-44a8-adad-6f5b77ded4c0.png)
 
 
