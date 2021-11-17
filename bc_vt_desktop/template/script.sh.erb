@@ -11,6 +11,7 @@ pwd
 
 echo running on ${host}:${port}
 
+tmux new-session -d -s OOD.tmux.$SLURM_JOBID
 walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
 sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
 echo converting walltime to sleeptime: $walltime is $sleeptime
