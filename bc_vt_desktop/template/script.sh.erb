@@ -4,14 +4,17 @@
 while [ ! -f ./connection.rc ]; do sleep 1; done
 source connection.rc
 cat connection.rc
+
+# capturing for debug
 env > env.txt
 
 pwd
 
-
 echo running on ${host}:${port}
 
 tmux new-session -d -s OOD.tmux.$SLURM_JOBID
+
+# hack to stay alive, change to get sing pid
 walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
 sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
 echo converting walltime to sleeptime: $walltime is $sleeptime
