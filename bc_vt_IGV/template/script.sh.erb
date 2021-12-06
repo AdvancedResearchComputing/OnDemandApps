@@ -1,6 +1,7 @@
 #!/bin/bash -l
 
 while [ ! -f ./connection.rc ]; do sleep 1; done
+sed -i 's_\$TMPDIR_'"$TMPDIR"'_' connection.rc
 source connection.rc
 
 env > env.txt
@@ -14,10 +15,15 @@ echo running on `hostname`
 echo starting singularity
 echo running on ${host}:${port}
 
-module load containers/singularity
+#module load containers/singularity
 
-singularity exec --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work \
-  /projects/arcsingularity/<%= context.Container %> bash /apps/IGV_Linux_2.9.4/igv.sh
+#singularity exec --env DISPLAY=$DISPLAY --writable-tmpfs \
+#   --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work \
+#  /projects/arcsingularity/<%= context.Container %> bash /apps/IGV_Linux_2.9.4/igv.sh
+
+singularity exec --writable-tmpfs --cleanenv \
+    --bind=$TMPDIR,/projects,/work \
+    /projects/arcsingularity/<%= context.Container %> bash run_IGV.sh
 
 wait $!
 
