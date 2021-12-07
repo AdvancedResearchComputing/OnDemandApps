@@ -1,0 +1,14 @@
+---
+name: qGIS
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch a [qGIS] Server in a container on one node.  Currently works on [TinkerCliffs] and [Infer].  For issues or requests, please submit a github issue for the [OnDemand app] referencing qGIS <P>
+
+  [qGIS]: https://hub.docker.com/r/qgis/qgis
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [OnDemand app]: https://github.com/AdvancedResearchComputing/OnDemandApps

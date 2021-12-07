@@ -1,0 +1,24 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+sed -i 's_\$TMPDIR_'"$TMPDIR"'_' connection.rc
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname` at ${host}:${port}
+echo starting tmux and container <%= context.Container %>
+
+tmux new-session -d -s OOD.tmux.$SLURM_JOBID
+singularity exec --cleanenv --writable-tmpfs \
+  --bind=$TMPFS:/tmp,$TMPDIR,/projects,/work \
+  /global/arcsingularity/<%= context.Container %> bash run_qGIS.sh
+
+#  /work/rsettlag/qgis_test.sif qgis
+wait $!
+
