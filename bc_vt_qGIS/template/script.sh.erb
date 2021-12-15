@@ -18,7 +18,6 @@ tmux new-session -d -s OOD.tmux.$SLURM_JOBID
 singularity exec --cleanenv --writable-tmpfs \
   --bind=$TMPFS:/tmp,$TMPDIR,/projects,/work \
   /global/arcsingularity/<%= context.Container %> bash run_qGIS.sh
-
-#  /work/rsettlag/qgis_test.sif qgis
+  
 wait $!
 
