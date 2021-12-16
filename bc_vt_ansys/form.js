@@ -1,5 +1,8 @@
 'use strict'
 
+
+## leaving OSC cruff till after dynamic js in 2.0.20
+
 /**
  * Fix num cores, allowing blanks to remain
  */
