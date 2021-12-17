@@ -1,12 +1,12 @@
 name: CITest
 on: 
-  push:
-    branches: 
-      - citest
+  # push:
+  #   branches: 
+  #     - citest
   pull_request:
     branches: 
-      - master
-      - rearch
+      - citest
+      # - rearch
 #jobs:
 #  matr:
 #    name: Matrix test
