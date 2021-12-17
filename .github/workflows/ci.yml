@@ -65,7 +65,7 @@ jobs:
           context: .
           push: true
           tags:  vtarc/poc_repo:latest
-          file: ${{ context }}/bc_vt_matlab_html/DockerFiles/Dockerfile
+          file: ${{ github.workspace }}/bc_vt_matlab_html/DockerFiles/Dockerfile
     outputs:
       output1: ${{  steps.step2.outputs.ppp }}
       output2: ${{  steps.step3.outputs.PR_NUM2 }}   
