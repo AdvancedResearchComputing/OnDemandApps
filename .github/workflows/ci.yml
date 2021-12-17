@@ -48,7 +48,7 @@ jobs:
         id: step3
         run:  echo "::set-output name=PR_NUM2::${{ env.PR_NUM }}"
       - name: echo PR
-        run: echo "${{  env.PR_NUM  }}"   
+        run: echo "${{  env.PR_NUM  }}"
       - name: Login Docker Hub step
         id: step1
         uses: docker/login-action@v1
