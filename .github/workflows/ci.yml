@@ -30,21 +30,21 @@ jobs:
         name: Code
         # with:
         #   path: my-repo
-      - name: Set environment variable
-        run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV
-      - name: Test environment variable
-        run: echo ${{ env.RELEASE_VERSION }}
-      - name: Get PR number
-        id: step2
-        run: | 
-          PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-          echo "PR_NUM=$PR_NUMBER" >> $GITHUB_ENV
-          echo "::set-output name=ppp::hello"
-      - name: Env varibale set
-        id: step3
-        run:  echo "::set-output name=PR_NUM2::${{ env.PR_NUM }}"
-      - name: echo PR number
-        run: echo "${{  env.PR_NUM  }}"
+      # - name: Set environment variable
+      #   run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV
+      # - name: Test environment variable
+      #   run: echo ${{ env.RELEASE_VERSION }}
+      # - name: Get PR number
+      #   id: step2
+      #   run: | 
+      #     PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+      #     echo "PR_NUM=$PR_NUMBER" >> $GITHUB_ENV
+      #     echo "::set-output name=ppp::hello"
+      # - name: Env varibale set
+      #   id: step3
+      #   run:  echo "::set-output name=PR_NUM2::${{ env.PR_NUM }}"
+      # - name: echo PR number
+      #   run: echo "${{  env.PR_NUM  }}"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -63,8 +63,8 @@ jobs:
       #   uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       #   with:
       #     images:  vtarc/poc_repo
-      # - name: list
-      #   run: ls -larth $GITHUB_WORKSPACE ;pwd
+      - name: list
+        run: ls -larth $GITHUB_WORKSPACE ;pwd
       - name: Push to docker
         uses: docker/build-push-action@v2
         id: docker_build
@@ -73,9 +73,9 @@ jobs:
           push: true
           tags:  vtarc/poc_repo:latest
           file: ${{ github.workspace }}/bc_vt_matlab_html/DockerFiles/Dockerfile
-    outputs:
-      output1: ${{  steps.step2.outputs.ppp }}
-      output2: ${{  steps.step3.outputs.PR_NUM2 }}   
+    # outputs:
+    #   output1: ${{  steps.step2.outputs.ppp }}
+    #   output2: ${{  steps.step3.outputs.PR_NUM2 }}   
   BuildImage:
     if: github.event_name == 'pull_request'
     name: Build Docker Image
