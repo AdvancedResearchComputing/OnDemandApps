@@ -117,6 +117,4 @@ jobs:
         run: |
             echo  '${{  steps.step00.outputs.FL_LIST }}'
             echo  '${{  env.FL_L }}'
-    outputs:
-      output1: ${{  steps.step00.outputs.FL_LIST }}
 
