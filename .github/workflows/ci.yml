@@ -73,9 +73,9 @@ jobs:
   #         push: true
   #         tags:  vtarc/poc_repo:latest
   #         file: ${{ github.workspace }}/bc_vt_matlab_html/Dockerfiles/Dockerfile
-    # outputs:
-    #   output1: ${{  steps.step2.outputs.ppp }}
-    #   output2: ${{  steps.step3.outputs.PR_NUM2 }}   
+    outputs:
+      output1: ${{  steps.step2.outputs.ppp }}
+      output2: ${{  steps.step3.outputs.PR_NUM2 }}   
   BuildImage:
     if: github.event_name == 'pull_request'
     name: Build Docker Image
@@ -84,33 +84,39 @@ jobs:
     environment:
       name: test
     steps:
-      - name: Track all files using plugin
-        id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
-      - name: List all files from the plugin output
-        run: |
-          cat $HOME/files.json
-          cat $HOME/files_modified.json
-          cat $HOME/files_added.json
-          cat $HOME/files_removed.json
-          echo '${{ steps.file_changes.outputs.files}}'
-          echo '${{ steps.file_changes.outputs.files_modified}}'
-          echo '${{ steps.file_changes.outputs.files_added}}'
-          echo '${{ steps.file_changes.outputs.files_removed}}'
-      - name: List folders
-        id: step001
-        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
-        run: | 
-            LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/11/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
-            for j in "${LIST[@]}"; do echo "$j"; done
-            echo "FL_L=$LIST" >> $GITHUB_ENV
-            echo "::set-output name=FL_LIST::${{ env.FL_L }}"         
+      # - name: Track all files using plugin
+      #   id: file_changes
+      #   uses: trilom/file-changes-action@v1.2.3
+      # - name: List all files from the plugin output
+      #   run: |
+      #     cat $HOME/files.json
+      #     cat $HOME/files_modified.json
+      #     cat $HOME/files_added.json
+      #     cat $HOME/files_removed.json
+      #     echo '${{ steps.file_changes.outputs.files}}'
+      #     echo '${{ steps.file_changes.outputs.files_modified}}'
+      #     echo '${{ steps.file_changes.outputs.files_added}}'
+      #     echo '${{ steps.file_changes.outputs.files_removed}}'
       # - name: List folders
-      #   id: step00 
+      #   id: step001
       #   if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
       #   run: | 
-      #       LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/${{  needs.DockerHub.outputs.output2  }}/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
+      #       LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/11/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
       #       for j in "${LIST[@]}"; do echo "$j"; done
       #       echo "FL_L=$LIST" >> $GITHUB_ENV
-      #       echo "::set-output name=FL_LIST::${{ env.FL_L }}" 
+      #       echo "::set-output name=FL_LIST::${{ env.FL_L }}"         
+      - name: List folders
+        id: step00 
+        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
+        run: | 
+            LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/${{  needs.DockerHub.outputs.output2  }}/files  | grep \"filename\" | grep Dockerfile | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}' | sed 's/"//g' )
+            for j in "${LIST[@]}"; do echo "$j"; done
+            echo "FL_L=$LIST" >> $GITHUB_ENV
+            echo "::set-output name=FL_LIST::${{ env.FL_L }}"
+      - name: echo list
+        run: |
+            echo  '${{  steps.step00.outputs.FL_LIST }}'
+            echo  '${{  env.FL_L }}'
+    outputs:
+      output1: ${{  steps.step00.outputs.FL_LIST }}
 
