@@ -99,7 +99,7 @@ jobs:
          
       - name: List folders
         id: step00 
-        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ci')
+        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
         run: | 
             LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos//pulls/${{  needs.DockerHub.outputs.output2  }}/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
             for j in "${LIST[@]}"; do echo "$j"; done
