@@ -1,8 +1,8 @@
 name: CITest
 on: 
-  # push:
-  #   branches: 
-  #     - master
+  push:
+    branches: 
+      - test
   pull_request:
     branches: 
       - master
