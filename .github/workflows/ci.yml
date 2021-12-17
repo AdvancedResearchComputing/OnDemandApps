@@ -97,13 +97,13 @@ jobs:
           echo '${{ steps.file_changes.outputs.files_added}}'
           echo '${{ steps.file_changes.outputs.files_removed}}'
        - name: List folders
-        id: step001
-        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
-        run: | 
-            LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/11/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
-            for j in "${LIST[@]}"; do echo "$j"; done
-            echo "FL_L=$LIST" >> $GITHUB_ENV
-            echo "::set-output name=FL_LIST::${{ env.FL_L }}"         
+         id: step001
+         if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
+         run: | 
+             LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/11/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
+             for j in "${LIST[@]}"; do echo "$j"; done
+             echo "FL_L=$LIST" >> $GITHUB_ENV
+             echo "::set-output name=FL_LIST::${{ env.FL_L }}"         
       # - name: List folders
       #   id: step00 
       #   if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
