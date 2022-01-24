@@ -16,22 +16,22 @@ Gather your requirements, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open your on demand portal and click the app
+Open your on demand portal and click the app:   
 ![image](https://user-images.githubusercontent.com/4628915/136077633-50ea6952-399f-494d-8ef9-244ed2d37fcd.png)
 
+
 #### Step 3 
-Fill in the required details 
+Fill in the required details:    
 ![image](https://user-images.githubusercontent.com/4628915/136077790-7d857c16-c2f9-4cfa-9d02-a3b8d1f62fa0.png)
 
+
 #### Step 4 
-
 Click Launch and your Jupyter Lab will be ready in few minutes: 
-
 ![image](https://user-images.githubusercontent.com/4628915/136078123-747b32f3-c117-4113-a46a-e1d7f380d397.png)
 
-#### Step 5 
-All your running jobs are available under "My Interactive Sessions" :
 
+#### Step 5 
+All your running jobs are available under "My Interactive Sessions":    
 ![image](https://user-images.githubusercontent.com/4628915/136078473-372c3fb1-892c-4a74-ae00-91cd1b7e2868.png)
 
 
