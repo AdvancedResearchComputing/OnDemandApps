@@ -41,31 +41,30 @@ Gather your requirements, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open your on demand portal and click the app
+Open your on demand portal and click the app:   
 ![app](https://user-images.githubusercontent.com/4628915/138606146-5d24312f-38d5-4d72-9302-b40738b8b87b.png)
 
 
 #### Step 3 
-Fill in the required details 
+Fill in the required details:    
 ![image](https://user-images.githubusercontent.com/4628915/138628533-605d4843-1fd0-416f-9e9f-c2d943b2415f.png)
 
 
-
 #### Step 4 
-
 Click Launch and your Matlab Lab will be ready in few minutes: 
 ![image](https://user-images.githubusercontent.com/4628915/138628674-03b274f1-f73a-4d62-8c6f-8a081e50d684.png)
 
-#### Step 5 
-All your running jobs are available under "My Interactive Sessions" :
 
+#### Step 5 
+All your running jobs are available under "My Interactive Sessions":    
 ![image](https://user-images.githubusercontent.com/4628915/138629267-4b439c14-6e13-4660-8fbf-5041fab6aaaf.png)
+
 
 Click `Connect to Matlab` button
 
 ![image](https://user-images.githubusercontent.com/4628915/138981967-b93fe064-78f4-48a4-b8e3-ea9a97bafd90.png)
 
-If you selected GPU partition You can also verify device with simple one liner: 
+If you selected GPU partition You can also verify device with simple one liner    
 
 ``` sh
 gpuDeviceCount("available")
