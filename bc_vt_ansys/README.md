@@ -54,7 +54,7 @@ Click Launch and your Desktop  will be ready in few minutes:
   
 #### Step 5 
 All your running jobs are available under "My Interactive Sessions":      
-![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/ansys5.png)
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/ansyss5.png)
 
 
 Want to install this app on your OOD System ? 
