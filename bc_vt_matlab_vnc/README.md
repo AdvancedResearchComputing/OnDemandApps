@@ -41,25 +41,22 @@ Gather your requirements, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open your on demand portal and click the app
+Open your on demand portal and click the app:
 ![image](https://user-images.githubusercontent.com/4628915/138629973-66a6ae83-36b3-44a8-adad-6f5b77ded4c0.png)
 
 
 #### Step 3 
-Fill in the required details 
+Fill in the required details:   
 ![image](https://user-images.githubusercontent.com/4628915/138606170-bdd126fd-7aa7-448d-9ac9-201fec27eb33.png)
 
 
 #### Step 4 
-
 Click Launch and your Matlab Lab will be ready in few minutes: 
-
 ![image](https://user-images.githubusercontent.com/4628915/138606222-c5ac5de6-9aa3-4bb6-a18d-00611d2d3dba.png)
 
 
 #### Step 5 
-All your running jobs are available under "My Interactive Sessions" :
-
+All your running jobs are available under "My Interactive Sessions":    
 ![image](https://user-images.githubusercontent.com/4628915/138606662-31e419c8-5226-4cf8-893c-c9bd579f0130.png)
 
 
