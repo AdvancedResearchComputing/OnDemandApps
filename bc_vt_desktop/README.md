@@ -41,22 +41,21 @@ Gather your requirements, You will need to provide:
 > For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
 #### Step 2 
-Open your on demand portal and click the app
+Open your on demand portal and click the app:   
 ![image](https://user-images.githubusercontent.com/4628915/138634970-70037570-0143-47bc-bde9-0227e6db1dfa.png)
 
 #### Step 3 
-Fill in the required details 
-
+Fill in the required details:    
 ![image](https://user-images.githubusercontent.com/4628915/138635016-a2b5ccbd-19f0-40f6-bbbe-870675f3e295.png)
 
 
 #### Step 4 
-
 Click Launch and your Desktop  will be ready in few minutes: 
 ![image](https://user-images.githubusercontent.com/4628915/138635230-b24d89ae-a1ce-4886-9277-934c63cfedcf.png)
 
+
 #### Step 5 
-All your running jobs are available under "My Interactive Sessions" :
+All your running jobs are available under "My Interactive Sessions":
 ![image](https://user-images.githubusercontent.com/4628915/138635318-656ad9bd-75d6-4cb4-a9d9-c2dcc861ab75.png)
 
 
