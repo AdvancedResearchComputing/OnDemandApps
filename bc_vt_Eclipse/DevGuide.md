@@ -46,7 +46,7 @@ For C/C++ Development
 
 - Make necessary description changes to **[manifest.yml](./manifest.yml)**
 
-### Packages made available under this [DockerImage(java)](https://hub.docker.com/repository/docker/vtarc/bc_vt_eclipse_java) or [Dockerfile](./DockerFiles/Dockerfile_java):
+### Packages made available under this [DockerImage(java)](https://hub.docker.com/repository/docker/vtarc/bc_vt_eclipse_java) or [Dockerfile_java](./DockerFiles/Dockerfile_java):
 
 
  [Eclipse java 21.03](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz)
