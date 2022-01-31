@@ -1,10 +1,8 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/rsettlage/ARC-ondemand-apps)
+# Batch Connect - GAMS Studio
+
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# Batch Connect - GamsStudio
-
-A Batch Connect app designed for [Advanced Research Computing]'s VT OnDemand that launches Remote Desktop
-within a batch job.  For other apps and assistance with Open OnDemand, see [Open OnDemand].
+An interactive app designed for VT OnDemand that launches a **GAMS Studio** batch job via singularity image.
 
 ## Prerequisites
 
@@ -12,48 +10,55 @@ This Batch Connect app requires the following software be installed on the
 **compute nodes** that the batch job is intended to run on (**NOT** the
 OnDemand node):
 
-<LIST DEPENDENCIES>
-- [Singularity] 3.7+
-- Accetto's Xfce Desktop with FireFox image
+- [Lmod] 6.0.1+ or any other `module restore` and `module load <modules>` based
+  CLI used to load appropriate environments within the batch job before
+  launching the Singularity image.
 
-For hardware rendering support (coming soon ...):
+- [Singularity] 3.7.1+
+- Corresponding module to launch the above Singularity image (see
+  [example_module])
 
-- [X server]
-- [VirtualGL] 2.3+
+[MATLAB]: https://matlab.mathworks.com/
+[Singularity]: http://singularity.lbl.gov/
+[Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+[example_module]: https://github.com/nickjer/singularity-rstudio/blob/master/example_module/
 
-**Optional** software:
+## OOD User Guide
 
-- [Lmod] 6.0.1+ or any other `module purge` and `module load <modules>` based
-  CLI used to load appropriate environments within the batch job
 
-[Open OnDemand] http://openondemand.org/  
-[Advanced Research Computing] https://arc.vt.edu/  
-[Xfce Desktop]: https://xfce.org/  
-[VirtualGL]: http://www.virtualgl.org/  
-[Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod   
-[Huckleberry] : https://arc.vt.edu/2018/08/new-arc-cluster-huckleberry/   
-[Cascades] : https://arc.vt.edu/computing/cascades/   
-[DragonsTooth] : https://arc.vt.edu/2016/08/new-arc-cluster-dragonstooth/   
-[TinkerCliffs] : https://arc.vt.edu/tinkercliffs/      
+#### Step 1 
+Gather your requirements, You will need to provide: 
+- Account
+- Reservation (optional)
+- Matlab version (optional)
+- No of hours  
+- No of CPUs you need
+- No of GPUs you need
 
-## Install
+> Note: partition of GPU may change based on different clusters use sinfo on cluster or else refer documentation links below  
+- Cluster
+> For details of VT cluster [Read More.](https://arc-rtd.readthedocs.io/en/latest/resources/compute.html)
+> For VT users without allocation you can use "personal". [Read More](https://arc-rtd.readthedocs.io/en/latest/usage/allocations.html#allocations)
 
-Use git to clone this app:
+#### Step 2 
+Open your on demand portal and click the app:   
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/gams2.png)
 
-```sh
-git clone <repo>
-cd <dir>
-```
+#### Step 3 
+Fill in the required details:    
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/gams3.png)
 
-You will not need to do anything beyond this as all necessary assets are
-installed. You will also not need to restart this app as it isn't a Passenger
-app.
 
-Again, you do not need to restart the app as it isn't a Passenger app.
+#### Step 4 
+Click Launch and your Desktop  will be ready in few minutes: 
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/gams4.png)
 
-## Contributing, see https://osc.github.io/ood-documentation/master/install-ihpc-apps.html for inspiration.
-1. Fork it 
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+
+#### Step 5 
+All your running jobs are available under "My Interactive Sessions":
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/gams5.png)
+
+
+Want to install this app on your OOD System ? 
+
+Follow our [Dev Guide](https://github.com/AdvancedResearchComputing/OnDemandApps/tree/main/bc_vt_desktop/DevGuide.md)
