@@ -39,7 +39,7 @@ Gather your requirements, You will need to provide:
 
 #### Step 2 
 Open your on demand portal and click the app:   
-![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/ansys2.png)
+![image](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/main/Images/a2.png)
 
   
 #### Step 3 
