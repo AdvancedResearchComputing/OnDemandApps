@@ -1,6 +1,6 @@
-# Batch Connect - Eclipse IDE
+# Batch Connect - Gams Studio
 
-An example Batch Connect app that launches a Eclipse IDE within a
+An example Batch Connect app that launches an instance of GAMS Studio within a
 batch job.
 
 ## Prerequisites
@@ -20,15 +20,9 @@ OnDemand node):
 ## Downloading and building docker image
 For Java Development
 ``` sh 
-    singularity pull ise.sif docker://vtarc/bc_vt_eclipse_java:latest
+    singularity pull ise.sif docker://vtarc/bc_vt_gamsStudio:latest
 ```
-
-For C/C++ Development
-``` sh 
-    singularity pull ise.sif docker://vtarc/bc_vt_eclipse_cpp:latest
-```
-
-- Change the Sif file locations in [script.sh.erb](./template/script.sh.erb#L23) and [form.yml.erb](./form.yml.erb#L65)
+- Change the Sif file locations in [script.sh.erb](./template/script.sh.erb#L23) and [form.yml.erb](./form.yml.erb#L19)
 
 
 ### Development Installation
@@ -46,14 +40,12 @@ For C/C++ Development
 
 - Make necessary description changes to **[manifest.yml](./manifest.yml)**
 
-### Packages made available under this [DockerImage(java)](https://hub.docker.com/repository/docker/vtarc/bc_vt_eclipse_java) or [Dockerfile_java](./DockerFiles/Dockerfile_java):
-
-
-- [Eclipse java 21.03](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz)
+### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_gamsStudio) or [Dockerfile](./DockerFiles/Dockerfile):
 
 
 
 ### Packages made available under this [DockerImage(cpp)](https://hub.docker.com/repository/docker/vtarc/bc_vt_eclipse_cpp) or [Dockerfile_cpp](./DockerFiles/Dockerfile_cpp):
 
-- [Eclipse cpp 21.03](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-cpp-2021-03-R-linux-gtk-x86_64.tar.gz)
+
+- [Gams Studio 32.20](https://d37drm4t2jghv5.cloudfront.net/distributions/33.2.0/linux/linux_x64_64_sfx.exe)
 
