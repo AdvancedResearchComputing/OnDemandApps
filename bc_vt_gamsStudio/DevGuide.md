@@ -22,7 +22,7 @@ For Java Development
 ``` sh 
     singularity pull ise.sif docker://vtarc/bc_vt_gamsStudio:latest
 ```
-- Change the Sif file locations in [script.sh.erb](./template/script.sh.erb#L23) and [form.yml.erb](./form.yml.erb#L19)
+- Change the Sif file locations in [script.sh.erb](./template/script.sh.erb#L23) and [form.yml.erb](./form.yml.erb#L53)
 
 
 ### Development Installation
@@ -42,9 +42,6 @@ For Java Development
 
 ### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_gamsStudio) or [Dockerfile](./DockerFiles/Dockerfile):
 
-
-
-### Packages made available under this [DockerImage(cpp)](https://hub.docker.com/repository/docker/vtarc/bc_vt_eclipse_cpp) or [Dockerfile_cpp](./DockerFiles/Dockerfile_cpp):
 
 
 - [Gams Studio 32.20](https://d37drm4t2jghv5.cloudfront.net/distributions/33.2.0/linux/linux_x64_64_sfx.exe)
