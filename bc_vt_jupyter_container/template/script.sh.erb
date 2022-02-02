@@ -1,6 +1,13 @@
 #!/bin/bash
 
 echo "start of script.sh"
+if [ -z ${HOME+x} ];
+then
+   export HOME=$(echo ~)
+	source /etc/profile
+	source /etc/bashrc
+	source $HOME/.bashrc
+fi
 
 unset XDG_RUNTIME_DIR
 
