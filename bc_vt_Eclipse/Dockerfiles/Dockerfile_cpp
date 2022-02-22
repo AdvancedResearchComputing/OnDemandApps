@@ -1,8 +1,6 @@
 FROM accetto/ubuntu-vnc-xfce-firefox-g3:latest
 
 RUN sudo -S apt install -y wget
-# For JAVA
-#COPY eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz 
 
 # For C++ 
 RUN wget https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-cpp-2021-03-R-linux-gtk-x86_64.tar.gz \
