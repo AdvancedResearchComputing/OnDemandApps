@@ -5,15 +5,9 @@ RUN sudo -S apt install -y wget
 RUN wget https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-03/R/eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz &&
 \ cp eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz /home/headless
 
-# For C++ 
-#COPY eclipse-cpp-2021-03-R-linux-gtk-x86_64.tar.gz /home/headless
 
 RUN sudo -S apt-get update \
     && sudo -S apt install -y build-essential libpci-dev libwebkit2gtk-4.0-dev
 # FOR JAVA
 RUN cd /home/headless/ \
 	&& eclipse-java-2021-03-R-linux-gtk-x86_64.tar.gz
-
-# FOR C++
-# RUN cd /home/headless/ \
-# 	&& tar -zxvf eclipse-cpp-2021-03-R-linux-gtk-x86_64.tar.gz
