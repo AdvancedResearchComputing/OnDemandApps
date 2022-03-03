@@ -4,6 +4,8 @@
 
 An interactive app designed for VT OnDemand that launches a [MATLAB] batch job via matlab singularity image that is based on HTML based which has its own advantages in terms of portability 
 
+Note, as is, this Mathworks implementation does not yet support a password or other security model, ie link sharing is posible. For an implementation using a middleware header check, see https://github.com/bsandbro/jupyter-matlab-proxy.
+
 ## Prerequisites
 
 This Batch Connect app requires the following software be installed on the
