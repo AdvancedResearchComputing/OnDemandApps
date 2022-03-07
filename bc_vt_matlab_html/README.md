@@ -5,7 +5,7 @@
 Note, this app is being refactored using a newe Matlab implementation which allows for more security options:
 
 # Refactor in process ...
-The core functionality for launching and accessing MATLAB in a browser tab has been refactored into a different repository: [!matlab-proxy](https://github.com/mathworks/matlab-proxy). The jupyter-matlab-proxy package extends matlab-proxy with code specific to integrating MATLAB with the Jupyter environment. Most of the enhancements to the core functionality will be pushed to the matlab-proxy repository - for example, it now supports the ability to install SSL certificates upon launch using the environment variables MWI_SSL_CERT_FILE and/or MWI_SSL_KEY_FILE (See Advanced-Usage.md for more info).
+The core functionality for launching and accessing MATLAB in a browser tab has been refactored into a different repository: ![matlab-proxy](https://github.com/mathworks/matlab-proxy). The jupyter-matlab-proxy package extends matlab-proxy with code specific to integrating MATLAB with the Jupyter environment. Most of the enhancements to the core functionality will be pushed to the matlab-proxy repository - for example, it now supports the ability to install SSL certificates upon launch using the environment variables MWI_SSL_CERT_FILE and/or MWI_SSL_KEY_FILE (See Advanced-Usage.md for more info).
 
 
 
