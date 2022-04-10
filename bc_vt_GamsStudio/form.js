@@ -1,8 +1,5 @@
 'use strict'
 
-
-### waiting to update for VT until we have a resources.yml file
-
 /**
  * Fix num cores, allowing blanks to remain
  */

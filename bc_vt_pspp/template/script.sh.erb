@@ -1,0 +1,23 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+echo running on ${host}:${port}
+
+module load containers/singularity
+
+singularity exec --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects \
+  /projects/arcsingularity/<%= context.Container %> psppire
+
+wait $!
+

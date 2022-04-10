@@ -1,0 +1,14 @@
+---
+name: LS-PrePost
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch LSDyna's PrePost on a remote desktop within a Singularity container.  For issues or requests, please submit a github issue for the [desktop OOD app].<BR>NOTE: If you need the module system in the terminal ssh to localhost.<BR><P><HR/><P>
+
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/Infer
+  [DragonsTooth]: https://www.arc.vt.edu/dragonstooth
+  [Cascades]: https://www.arc.vt.edu/cascades
+  [Huckleberry]: https://www.arc.vt.edu/huckleberry
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
+

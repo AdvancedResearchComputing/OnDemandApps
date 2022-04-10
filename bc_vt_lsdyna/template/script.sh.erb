@@ -1,0 +1,24 @@
+#!/bin/bash -l
+
+# in case we want to do something fun with host/port/etc later
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+cat connection.rc
+env > env.txt
+
+pwd
+
+
+echo running on ${host}:${port}
+
+module load tinkercliffs-rome/ls-prepost/4.8 
+lsprepost
+
+wait $!
+
+### saving for later for Cascades
+#module load ls-dyna-mpp/11.0.0
+#module load intel/18.2
+#PATH=$INTEL_DIR/impi/2018.2.199/bin64:$PATH
+#LD_LIBRARY_PATH=$INTEL_DIR/impi/2018.2.199/lib64/:$LD_LIBRARY_PATH
+#export I_MPI_DAPL_PROVIDER=ofa-v2-mlx4_0-1
