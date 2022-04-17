@@ -1,0 +1,79 @@
+#!/bin/bash
+pwd
+unset XDG_RUNTIME_DIR
+
+echo starting singularity
+
+module load containers/singularity
+
+# add csrftoken to connection.yml file
+(
+csrftoken=$(python -c 'from uuid import uuid4; print(uuid4())')
+connection=${PWD}/connection.yml
+while true; do
+  if [ -s $connection ]; then
+     echo "csrftoken: $csrftoken" >>$connection
+     exit 0
+  fi
+  sleep 1
+done
+) &
+
+echo
+echo
+echo "fix the rstudio error on start, note this is because the Rstudio Open Source version doesn't support multiple sessions and most users will not close R sessions"
+find ~/.rstudio/sessions/active/*/session-persistent-state -type f -exec sed -i 's/abend="1"/abend="0"/' '{}' \;
+find ~/.local/share/rstudio/sessions/active/*/session-persistent-state -type f -exec sed -i 's/abend="1"/abend="0"/' '{}' \;
+
+echo
+echo
+echo "need to make Renviron file dynamically, calling it .Renviron.OOD, seems as though to use this file, needs to be baked into Rstudio config, ie sif"
+
+echo "R_LIBS_USER= ${HOME}/R/OOD/" >.Renviron.OOD.OOD
+singularity exec /global/arcsingularity/<%= context.Rversion %> lsb_release -ir | awk '{ print $NF"-" }' | tr -d '\n' >>.Renviron.OOD.OOD
+singularity exec /global/arcsingularity/<%= context.Rversion %> Rscript -e 'cat(R.version$major,".",R.version$minor,sep="")' >>.Renviron.OOD.OOD
+
+echo make actual change
+echo $(cat .Renviron.OOD.OOD) | sed 's/ //g' >.Renviron.OOD
+cat .Renviron.OOD
+source .Renviron.OOD
+echo R_LIBS_USER is $R_LIBS_USER
+
+## need to think about how to allow users to have something in this ... user or project profile may be another way ...
+cp -v .Renviron.OOD ~/.Renviron.OOD
+
+#### set/create R_LIBS directory
+if [ ! -d ${R_LIBS_USER} ]; then
+    echo need to make R_LIBS_USER directory
+    mkdir -p ${R_LIBS_USER}
+fi
+
+## think these may be redundant with above cookie, but need to move on for now...
+echo few things for Rstudio 1.4xxx
+mkdir -p "$TMPDIR/tmp/rstudio-server"
+uuidgen > "$TMPDIR/tmp/rstudio-server/secure-cookie-key"
+chmod 0600 "$TMPDIR/tmp/rstudio-server/secure-cookie-key"
+
+mkdir -p "$TMPDIR/var/lib"
+mkdir -p "$TMPDIR/var/run"
+
+
+# Start Rstudio Server
+echo
+echo
+echo starting Rstudio Server on $(hostname)
+
+singularity exec --bind=${TMPDIR}:/tmp,/projects, \
+   --bind=profiles:/etc/rstudio/profiles \
+   --bind=$TMPDIR/var/lib:/var/lib/rstudio-server \
+   --bind=$TMPDIR/var/run:/var/run/rstudio-server \
+   --bind=/sys/fs/cgroup \
+   /global/arcsingularity/<%= context.Rversion %> rserver \
+   --auth-encrypt-password=0 \
+   --server-app-armor-enabled=0 \
+   --auth-none=0 \
+   --www-port=${port} \
+   --auth-pam-helper-path=pam-helper 
+##   --session-timeout-minutes 0 ## seems to have been removed -- put it in profiles
+##   --rsession-path="${RSESSION_WRAPPER_FILE}" 
+
