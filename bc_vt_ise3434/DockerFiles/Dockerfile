@@ -51,6 +51,6 @@ RUN conda config --add channels https://conda.anaconda.org/gurobi
 RUN conda install gurobi
 # Create alternative for nano -> nano-tiny
 RUN update-alternatives --install /usr/bin/nano nano /bin/nano-tiny 10
-
+RUN echo "done"
 # Switch back to jovyan to avoid accidental container runs as root
 USER ${NB_UID}

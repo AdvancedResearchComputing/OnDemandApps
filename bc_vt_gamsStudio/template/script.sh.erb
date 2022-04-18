@@ -1,0 +1,31 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+echo running on ${host}:${port}
+
+module load containers/singularity
+
+gams_tc_img='/projects/arcsingularity/gams_tc_latest.sif'
+
+# Bind license from user's home directory to GAMS container
+gamsLicenseBindPath=/home/${USER}/gamslice.txt:/home/headless/GAMS/gams33.2_linux_x64_64_sfx/gamslice.txt
+
+singularity exec --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work,$gamsLicenseBindPath $gams_tc_img  bash runScript.sh
+
+wait $!
+
+#walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
+#sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
+#echo converting walltime to sleeptime: $walltime is $sleeptime
+#sleep $sleeptime

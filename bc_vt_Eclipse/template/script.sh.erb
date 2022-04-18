@@ -1,0 +1,28 @@
+#!/bin/bash
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+
+module load containers/singularity
+
+sleep 2
+ls /tmp/.X11-unix
+echo starting Eclipse
+
+echo DISPLAY:$DISPLAY
+echo USER:$USER
+
+
+# Path to Eclipse TC Image
+eclipse_img='/projects/arcsingularity/<%= context.ide_version %>'
+
+
+singularity exec --env DISPLAY=$DISPLAY --writable-tmpfs --bind=/tmp:/tmp,/tmp/.X11-unix:/tmp/.X11-unix,/projects:/projects,/work:/work $eclipse_img  /home/headless/eclipse/eclipse
+
+wait $!

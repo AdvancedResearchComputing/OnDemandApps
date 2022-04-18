@@ -2,11 +2,11 @@ name: CITest
 on: 
   # push:
   #   branches: 
-  #     - master
+  #     - citest
   pull_request:
     branches: 
-      - master
-      - rearch
+      - citest
+      # - rearch
 #jobs:
 #  matr:
 #    name: Matrix test
@@ -20,68 +20,74 @@ on:
 #      - name: print mat
 #        run: echo ${{ matrix.docker_ver  }}
 jobs:
-  build:
-    name: Code Checkout
-    runs-on: ubuntu-latest
-    environment: 
-      name: test
-    steps:
-      - uses: actions/checkout@master
-        name: Code
-        # with:
-        #   path: my-repo
-      - name: Set environment variable
-        run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV
-      - name: Test environment variable
-        run: echo ${{ env.RELEASE_VERSION }}
-      - run: echo hello
-        name: Code Checkout
-      - name: Get PR number
-        id: step2
-        run: | 
-          PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-          echo "PR_NUM=$PR_NUMBER" >> $GITHUB_ENV
-          echo "::set-output name=ppp::hello"
-      - name: env varibale set
-        id: step3
-        run:  echo "::set-output name=PR_NUM2::${{ env.PR_NUM }}"
-      - name: echo PR
-        run: echo "${{  env.PR_NUM  }}"   
-      - name: Login Docker Hub step
-        id: step1
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images:  vtarc/poc_repo
-      - name: list
-        run: ls -larth $GITHUB_WORKSPACE ;pwd
-      - name: Push to docker
-        uses: docker/build-push-action@v2
-        id: docker_build
-        with:
-          context: .
-          push: true
-          tags:  vtarc/poc_repo:latest
-          file: ./bc_vt_app_hilde/DockerFiles/Dockerfile
+  # build:
+  #   name: Code Checkout
+  #   runs-on: ubuntu-latest
+  #   environment: 
+  #     name: test
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       name: Code
+  #       # with:
+  #       #   path: my-repo
+  #     # - name: Set environment variable
+  #     #   run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV
+  #     # - name: Test environment variable
+  #     #   run: echo ${{ env.RELEASE_VERSION }}
+  #     # - name: Get PR number
+  #     #   id: step2
+  #     #   run: | 
+  #     #     PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+  #     #     echo "PR_NUM=$PR_NUMBER" >> $GITHUB_ENV
+  #     #     echo "::set-output name=ppp::hello"
+  #     # - name: Env varibale set
+  #     #   id: step3
+  #     #   run:  echo "::set-output name=PR_NUM2::${{ env.PR_NUM }}"
+  #     # - name: echo PR number
+  #     #   run: echo "${{  env.PR_NUM  }}"
+  #     -
+  #       name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v1
+  #     -
+  #       name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
+
+  #     - name: Login Docker Hub step
+  #       id: step1
+  #       uses: docker/login-action@v1
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USER }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #     # - name: Extract metadata (tags, labels) for Docker
+  #     #   id: meta
+  #     #   uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+  #     #   with:
+  #     #     images:  vtarc/poc_repo
+  #     - name: list
+  #       run: ls -larth $GITHUB_WORKSPACE ;pwd
+  #     - name: Push to docker
+  #       uses: docker/build-push-action@v2
+  #       id: docker_build
+  #       with:
+  #         context: .
+  #         push: true
+  #         tags:  vtarc/poc_repo:latest
+  #         file: ${{ github.workspace }}/bc_vt_matlab_html/Dockerfiles/Dockerfile
     outputs:
       output1: ${{  steps.step2.outputs.ppp }}
       output2: ${{  steps.step3.outputs.PR_NUM2 }}   
   BuildImage:
     if: github.event_name == 'pull_request'
     name: Build Docker Image
-    needs: [build]
+    # needs: [build]
     runs-on: ubuntu-latest
     environment:
       name: test
     steps:
-      - id: file_changes
+      - name: Track all files using plugin
+        id: file_changes
         uses: trilom/file-changes-action@v1.2.3
-      - name: List all files using plugin
+      - name: List all files from the plugin output
         run: |
           cat $HOME/files.json
           cat $HOME/files_modified.json
@@ -92,10 +98,25 @@ jobs:
           echo '${{ steps.file_changes.outputs.files_added}}'
           echo '${{ steps.file_changes.outputs.files_removed}}'
       - name: List folders
-        id: step00 
-        run: | 
-            LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/ayushchatur/ARCworkflowPOC/pulls/${{  needs.DockerHub.outputs.output2  }}/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
-            for j in "${LIST[@]}"; do echo "$j"; done
-            echo "FL_L=$LIST" >> $GITHUB_ENV
-            echo "::set-output name=FL_LIST::${{ env.FL_L }}" 
+        id: step001
+        if: contains(${{ steps.file_changes.outputs.files_modified}}, 'kabootar')
+        run: |
+            echo "yes"
+      #   run: | 
+      #       LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/11/files | grep filename | awk -F ':' '{print $2}' |  awk -F '/' '{print $1 }' | uniq | grep  "bc_vt*" | sed 's/"//g' )
+      #       for j in "${LIST[@]}"; do echo "$j"; done
+      #       echo "FL_L=$LIST" >> $GITHUB_ENV
+      #       echo "::set-output name=FL_LIST::${{ env.FL_L }}"         
+      # - name: List folders
+      #   id: step00 
+      #   if: contains(${{ steps.file_changes.outputs.files_modified}}, 'ayush')
+      #   run: | 
+      #       LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/pulls/${{  needs.DockerHub.outputs.output2  }}/files  | grep filename | awk -F ':' '{print $2}' | grep Dockerfile | awk -F ' ' '{print $2}' | awk -F '/' '{print $1}' | sed 's/"//g' )
+      #       for j in "${LIST[@]}"; do echo "$j"; done
+      #       echo "FL_L=$LIST" >> $GITHUB_ENV
+      #       echo "::set-output name=FL_LIST::${{ env.FL_L }}"
+      # - name: echo list
+      #   run: |
+      #       echo  '${{  steps.step00.outputs.FL_LIST }}'
+      #       echo  '${{  env.FL_L }}'
 
