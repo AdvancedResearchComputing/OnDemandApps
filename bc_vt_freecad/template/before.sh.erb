@@ -1,0 +1,27 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+moduel reset
+module load cuda-latest/toolkit
+module load containers/singularity
+#echo loaded cuda toolkit 
+module list
+SINGULARITYENV_PATH=$PATH
+SINGULARITYENV_CUDA_PATH=$CUDA_PATH
+SINGULARITYENV_CUDA_ROOT=$CUDA_ROOT
+SINGULARITYENV_CUDA_CMLOCAL_ROOT=$CUDA_CMLOCAL_ROOT
+SINGULARITYENV_CUDA_INSTALL_PATH=$CUDA_INSTALL_PATH
+SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+SINGULARITYENV_CUDA_HOME=$CUDA_HOME
+SINGULARITYENV_CUDA_INC_PATH=$CUDA_INC_PATH
+SINGULARITYENV_CUDA_SDK=$CUDA_SDK
+SINGULARITYENV_LIBRARY_PATH=$LIBRARY_PATH
+SINGULARITYENV_PATH=$PATH
+
+singularity run --nv --cleanenv --env PYTHONPATH=/usr/local/lib/python3.8/dist-packages/websockify-0.9.0-py3.8.egg --env PATH=$PATH \
+--env PYTHONPATH=/usr/local/lib/python3.8/dist-packages/websockify-0.9.0-py3.8.egg --bind `pwd`:/cwd,/projects,/cm/shared \
+    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+#while [ ! -f ./connection.rc ]; do sleep 1; done
+#source connection.rc
+
