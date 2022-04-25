@@ -51,7 +51,7 @@ set -x
 #
 pwd
 
-singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects,/work:/work \
+singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects \
 $sif_file bash ./run_script.sh
 
 echo "end of script.sh"

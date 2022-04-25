@@ -41,7 +41,7 @@ set -x
 #
 #
 
-singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects,/work:/work \
+singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects:/projects \
    /projects/arcsingularity/AMD/<%= context.Container %> \
    jupyter notebook --config="${CONFIG_FILE}"
 

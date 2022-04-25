@@ -5,6 +5,6 @@ pwd
 
 module load containers/singularity
 singularity run --cleanenv \
-    --bind `pwd`:/cwd,/projects,/work/$USER \
+    --bind `pwd`:/cwd,/projects \
     /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
 
