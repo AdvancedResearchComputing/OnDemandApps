@@ -22,7 +22,6 @@ OnDemand node):
 
 - Change the Sif file locations in [script.sh.erb](./template/script.sh.erb#L27)
 
-
 ### Development Installation
 
 ```bash
