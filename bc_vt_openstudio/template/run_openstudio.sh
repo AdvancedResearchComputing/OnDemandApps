@@ -1,0 +1,2 @@
+source connection.rc
+OpenStudioApp
