@@ -22,7 +22,7 @@ echo running on ${host}:${port}
 #  /projects/arcsingularity/<%= context.Container %> bash /apps/IGV_Linux_2.9.4/igv.sh
 
 singularity exec --writable-tmpfs --cleanenv \
-    --bind=$TMPDIR,/projects,/work \
+    --bind=$TMPDIR,/projects \
     /projects/arcsingularity/<%= context.Container %> bash run_IGV.sh
 
 wait $!

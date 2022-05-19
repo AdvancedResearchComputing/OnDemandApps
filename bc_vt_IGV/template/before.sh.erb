@@ -9,6 +9,6 @@ module load containers/singularity
 #    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
 
 singularity run --cleanenv --nv \
-    --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/work/$USER,/cm \
+    --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/cm \
     /projects/arcsingularity/ubuntu-xfce-v0.2.0.sif -d "IGV-$(hostname)" &
 

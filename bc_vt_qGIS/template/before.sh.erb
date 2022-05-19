@@ -19,5 +19,5 @@ unset SINGULARITY_TMPDIR
 export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 singularity run --cleanenv --nv \
-    --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/work/$USER,/cm \
+    --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/cm \
     /global/arcsingularity/ubuntu-xfce-v0.2.0.sif -d "qGIS-$(hostname)" &

@@ -1,0 +1,21 @@
+<%-
+ csrftoken="MYTOKEN"
+-%>
+<script defer src="https://use.fontawesome.com/releases/v5.8.2/js/brands.js" integrity="sha384-GtvEzzhN52RvAD7CnSR7TcPw555abR8NK28tAqa/GgIDk59o0TsaK6FHglLstzCf" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.8.2/js/fontawesome.js" integrity="sha384-Ia7KZbX22R7DDSbxNmxHqPQ15ceNzg2U4h5A8dy3K47G2fV1k658BTxXjp7rdhXa" crossorigin="anonymous"></script>
+<script>
+  var hostButton=$( "a.btn.btn-primary.btn-sm.fas.fa-terminal" );
+  var hostname=hostButton.text();
+  hostButton.replaceWith(hostname);
+  document.cookie = "csrf-token=<%= csrftoken %>; path=/rnode/<%= host %>/<%= port %>/; secure";
+</script>
+<form action="/rnode/<%= host %>/<%= port %>/auth-do-sign-in" method="post" target="_blank">
+  <input type="hidden" name="username" value="<%= ENV["USER"] %>"/>
+  <input type="hidden" name="password" value="<%= password %>"/>
+  <input type="hidden" name="staySignedIn" value="1"/>
+  <input type="hidden" name="appUri" value=""/>
+  <input id="csrfToken" type="hidden" name="csrf-token" value="<%= csrftoken %>"/>
+  <button class="btn btn-primary" type="submit">
+    <i class="fab fa-r-project"></i> Connect to RStudio Server
+  </button>
+</form>

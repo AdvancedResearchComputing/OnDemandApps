@@ -16,8 +16,8 @@ echo starting tmux and container <%= context.Container %>
 
 tmux new-session -d -s OOD.tmux.$SLURM_JOBID
 singularity exec --cleanenv --writable-tmpfs \
-  --bind=$TMPFS:/tmp,$TMPDIR,/projects,/work \
+  --bind=$TMPFS:/tmp,$TMPDIR,/projects \
   /global/arcsingularity/<%= context.Container %> bash run_qGIS.sh
-  
+
 wait $!
 

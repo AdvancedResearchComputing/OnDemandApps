@@ -1,0 +1,6 @@
+---
+name: Rstudio
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch a Rstudio Server in a container on one node.

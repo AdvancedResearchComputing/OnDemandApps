@@ -1,3 +1,19 @@
+echo get env in before, then hack it to make sure
+env >env.txt
+
+if [ -z ${HOME+x} ];
+then
+    export HOME=$(echo ~)
+	source /etc/profile
+	source /etc/bashrc
+	source $HOME/.bashrc
+fi
+
+echo #####################################
+echo starting before.sh
+echo #####################################
+
+
 # Export the module function if it exists
 [[ $(type -t module) == "function" ]] && export -f module
 hostname
@@ -5,6 +21,6 @@ pwd
 
 module load containers/singularity
 singularity run --cleanenv \
-    --bind `pwd`:/cwd,/projects,/work/$USER \
+    --bind `pwd`:/cwd,/projects \
     /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
 

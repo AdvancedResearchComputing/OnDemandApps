@@ -20,14 +20,6 @@ OnDemand node):
 
 --- 
 
-## Downloading and building docker image
-``` sh 
-    singularity pull matlab.sif docker://vtarc/bc_vt_matlab_html:latest
-```
-
-- Change the Sif file locations in [script.sh.erb](https://github.com/AdvancedResearchComputing/OnDemandApps/blob/233185f8f1e7115bde8129d4356860056754f6f4/bc_vt_matlab_vnc/template/script.sh.erb#L31)
-
-
 ### Development Installation
 
 ```bash
@@ -40,12 +32,8 @@ OnDemand node):
    cd /var/www/ood/apps/sys
    git clone git@github.com:AdvancedResearchComputing/OnDemandApps.git
 ```
-> Make sure to give executable permissions for *image file*
-
 
 - Make necessary description changes to **[manifest.yml](./manifest.yml)**
-
-### Packages made available under this [DockerImage](https://hub.docker.com/repository/docker/vtarc/bc_vt_matlab_html) or [Dockerfile](./DockerFiles/Dockerfile):
 
 ``` sh
  matlab

@@ -1,0 +1,72 @@
+#!/bin/bash
+pwd
+unset XDG_RUNTIME_DIR
+function have { type -t "$1" >/dev/null; }
+while ! have module; do echo "waiting"; sleep 1; done; echo "module works"
+
+echo starting singularity
+
+module load containers/singularity
+
+# echo build container first, this can take some time
+
+echo
+echo
+echo "fix the rstudio error on start, note this is because the Rstudio Open Source version doesn't support multiple sessions and most"
+echo "users will not close R sessions"
+find ~/.rstudio/sessions/active/*/session-persistent-state -type f -exec sed -i 's/abend="1"/abend="0"/' '{}' \;
+
+echo
+echo
+echo "need to make Renviron file dynamically, calling it .Renviron.OOD, seems as though to use this file, needs to be baked into Rstudio config, ie sif"
+
+echo "R_LIBS_USER= ${HOME}/R/OOD/" >.Renviron.OOD.OOD
+singularity exec /projects/arcsingularity/AMD/<%= context.Rversion %> lsb_release -ir | awk '{ print $NF"-" }' | tr -d '\n' >>.Renviron.OOD.OOD
+singularity exec /projects/arcsingularity/AMD/<%= context.Rversion %> Rscript -e 'cat(R.version$major,".",R.version$minor,sep="")' >>.Renviron.OOD.OOD
+
+echo make actual change
+echo $(cat .Renviron.OOD.OOD) | sed 's/ //g' >.Renviron.OOD
+cat .Renviron.OOD
+source .Renviron.OOD
+echo R_LIBS_USER is $R_LIBS_USER
+
+## need to think about how to allow users to have something in this ... user or project profile may be another way ...
+cp -v .Renviron.OOD ~/.Renviron.OOD
+
+#### set/create R_LIBS directory
+if [ ! -d ${R_LIBS_USER} ]; then
+    echo need to make R_LIBS_USER directory
+    mkdir -p ${R_LIBS_USER}
+fi
+
+## copied from Martin Cuma at Utah
+## now create rsession.sh
+# Generate an `rsession` wrapper script
+# export RSESSION_WRAPPER_FILE="${PWD}/rsession.sh"
+# (
+# umask 077
+# sed 's/^ \{2\}//' > "${RSESSION_WRAPPER_FILE}" << EOL
+  #!/usr/bin/env bash
+  # Launch the original command
+#   echo "Launching rsession..."
+#   set -x
+  ## --session-timeout-minutes 0
+#  exec rsession --r-libs-user "${R_LIBS_USER}" "\${@}"
+# EOL
+# )
+# chmod 700 "${RSESSION_WRAPPER_FILE}"
+
+# Start Rstudio Server
+echo
+echo
+echo starting Rstudio Server on $(hostname)
+
+singularity exec --bind=${TMPDIR}:/tmp,/projects,/fastscratch,profiles:/etc/rstudio/profiles,Rprofile.site:/usr/local/lib/R/etc/Rprofile.site \
+   /projects/arcsingularity/AMD/<%= context.Rversion %> rserver \
+   --auth-encrypt-password=0 \
+   --server-app-armor-enabled=0 \
+   --auth-none=0 \
+   --www-port=${port} \
+   --auth-pam-helper-path=pam-helper 
+##   --rsession-path="${RSESSION_WRAPPER_FILE}" 
+

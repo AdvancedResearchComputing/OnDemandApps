@@ -1,0 +1,28 @@
+echo start before
+if [ -z ${HOME+x} ];
+then
+    export HOME=$(echo ~)
+	source /etc/profile
+	source /etc/bashrc
+	source $HOME/.bashrc
+fi
+
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+
+module load containers/singularity
+
+## some singularity cleanup
+unset SINGULARITY_TMPDIR
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+#singularity run --cleanenv --nv \
+#    --bind `pwd`:/cwd,/projects,/work/$USER,/cm \
+#    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+
+
+singularity run --cleanenv --nv \
+    --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/cm \
+    /projects/arcsingularity/ubuntu-xfce-v0.2.0.sif -d "Desktop-$(hostname)" &

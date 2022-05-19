@@ -1,0 +1,26 @@
+#!/bin/bash -l
+
+while [ ! -f ./connection.rc ]; do sleep 1; done
+source connection.rc
+
+env > env.txt
+
+pwd
+#unset XDG_RUNTIME_DIR
+
+module list
+
+echo running on `hostname`
+echo starting singularity
+echo running on ${host}:${port}
+
+module load containers/singularity
+
+singularity run --bind=/projects:/groups /projects/arcsingularity/<%= context.version %>
+
+wait $!
+
+#walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
+#sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
+#echo converting walltime to sleeptime: $walltime is $sleeptime
+#sleep $sleeptime
