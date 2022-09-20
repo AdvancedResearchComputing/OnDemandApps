@@ -13,7 +13,7 @@ pwd
 echo running on ${host}:${port}
 
 module load VirtualGL/2.6.2-GCCcore-9.3.0
-module load ParaView/5.8.0-foss-2020a-Python-3.8.2-mpi
+module load ParaView/<%= context.bc_version %>
 ##paraview
 
 export VGL_DISPLAY=$DISPLAY
