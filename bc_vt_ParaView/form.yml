@@ -36,7 +36,12 @@ attributes:
     value: ""
     help: |
        - The allocation you would like to use for SLURM.
-
+  bc_version:
+    widget: select
+    label: Paraview version
+    value: ""
+    help: | 
+       - The paraview version changes with cluster selection
   num_cores:
     widget: number_field
     label: Number of cores per node (min-1, max-128)
@@ -66,6 +71,7 @@ form:
   - cluster
   - bc_account
   - reservation
+  - bc_version
   - bc_queue
   - bc_num_hours
   - bc_num_slots
