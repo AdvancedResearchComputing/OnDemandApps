@@ -3,7 +3,7 @@ name: ParaView
 category: Interactive Apps
 role: batch_connect
 description: |
-  This app will launch ParaView in VNC Server in a container on one node.  The container uses a Singularity image.  For issues or requests, please submit a github issue for the [desktop OOD app].<BR>NOTE: If you need the module system in the terminal ssh to localhost.<BR><P><HR/><P>
+  This app will launch ParaView in VNC Server in a container on one node.  The container uses a pre-built Module. For issues or requests, please submit a github issue for the [desktop OOD app].<BR>NOTE: If you need the module system in the terminal ssh to localhost.<BR><P><HR/><P>
 
   [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
   [Infer]: https://www.arc.vt.edu/infer
