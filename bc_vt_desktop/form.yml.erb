@@ -10,18 +10,16 @@ cluster:
 attributes:
 
 # specify widgets for user modifiable job settings
-  bc_queue:
-    help: |
-      - To request a GPU enabled queue, preface it with v100_. Example: v100_normal_q, t4_normal_q
-
-  bc_num_hours:
-    label: Number of hours (min-1, max-48)
-    required: true
-    value: 1
-    min: 1
-    max: 48
-    step: 1
-
+  bc_partition:
+    widget: "select"
+    label: "Partition on the Cluster"
+    options:
+    <%- pp = CustomQueues.queues -%>
+    <%- pp.each do |k,q| -%>
+      <%- q.each do |f| -%>
+      - [ "<%= f %>" , "<%= k %>"  ]
+      <%- end -%>
+    <%- end -%>
   bc_num_slots:
     label: Number of nodes (currently confined to 1)
     required: true
@@ -66,7 +64,7 @@ form:
   - cluster
   - bc_account
   - reservation
-  - bc_queue
+  - bc_partition
   - bc_num_hours
   - bc_num_slots
   - num_cores
