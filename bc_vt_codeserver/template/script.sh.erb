@@ -36,7 +36,7 @@ echo ""
 codeserver_img=/projects/arcsingularity/code-server_latest.sif
 
 # singularity command to run codeserver binary from container and then pass the respective authentication args, working dir and extensions dirs
-singularity exec --writable-tmpfs --bind=/tmp:/tmp,/projects:/projects,/work:/work $codeserver_img /usr/lib/code-server/bin/code-server \
+singularity exec --writable-tmpfs --bind=/tmp,/projects,/globalscratch,/global $codeserver_img /usr/lib/code-server/bin/code-server \
     --auth="password" \
     --bind-addr="0.0.0.0:${port}" \
     --disable-telemetry \
