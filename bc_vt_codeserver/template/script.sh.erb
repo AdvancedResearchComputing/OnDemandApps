@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+<%
+
+# Set our working directory.
+working_dir = Pathname.new(context.working_dir)
+
+# Ensure that code-server always starts up in either a user defined directory or the home directory.
+ if ! working_dir.exist?
+     working_dir = Pathname.new(ENV['HOME'])
+     elsif working_dir.file?
+         working_dir = working_dir.parent
+end
+%>
+
+# Setting the extensions dir for user
+CODE_SERVER_DATAROOT="$HOME/.local/share/code-server"
+mkdir -p "$CODE_SERVER_DATAROOT/extensions"
+
+# Expose the password to the server.
+export PASSWORD="$password"
+
+#Print compute node
+echo "$(date): Running on compute node ${compute_node}:$port"
+
+# VSCode complains that system git is too old.
+module load project/ondemand git app_code_server
+module load containers/singularity
+
+#
+# Start Code Server.
+#
+echo "$(date): Started code-server"
+echo ""
+
+codeserver_img=/projects/arcsingularity/code-server_latest.sif
+
+# singularity command to run codeserver binary from container and then pass the respective authentication args, working dir and extensions dirs
+singularity exec --writable-tmpfs --bind=/tmp:/tmp,/projects:/projects,/work:/work $codeserver_img /usr/lib/code-server/bin/code-server \
+    --auth="password" \
+    --bind-addr="0.0.0.0:${port}" \
+    --disable-telemetry \
+    --extra-extensions-dir="$CODE_SERVER_DATAROOT/extensions" \
+    --user-data-dir="$CODE_SERVER_DATAROOT" \
+    --log debug \
+    "<%= working_dir.to_s %>"

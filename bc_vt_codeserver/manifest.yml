@@ -1,0 +1,11 @@
+---
+name: Code Server
+category: IDE
+role: batch_connect
+description: |
+  This app will launch a single core job running [VS Code] server using [Code Server] on the [Tinkercliffs] or [Infer] cluster. 
+
+  [VS Code]: https://code.visualstudio.com/
+  [Code Server]: https://coder.com/
+  [TinkerCliffs]: https://arc-rtd.readthedocs.io/en/latest/resources/compute/00tinkercliffs.html
+  [Infer]: https://arc-rtd.readthedocs.io/en/latest/resources/compute/01infer.html
