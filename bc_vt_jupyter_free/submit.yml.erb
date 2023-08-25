@@ -30,7 +30,7 @@ batch_connect:
 script:
   native:
     - "--nodes=1"
-    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
+    - "--cpus-per-task=<%= sh_cpus.blank? ? "1" : sh_cpus %>"
     - "--time=<%= bc_num_hours + ":0:0" %>"
     - "--account=<%= bc_account %>"
     - "--reservation=<%= reservation %>"
