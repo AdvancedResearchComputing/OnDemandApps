@@ -33,4 +33,3 @@ script:
     - "--cpus-per-task=<%= sh_cpus.blank? ? "1" : sh_cpus %>"
     - "--time=<%= bc_num_hours + ":0:0" %>"
     - "--account=<%= sh_account %>"
-    - "--reservation=<%= reservation %>"
