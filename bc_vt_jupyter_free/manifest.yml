@@ -1,0 +1,11 @@
+---
+name: JupyterLab free
+category: Interactive Apps
+description: |
+role: batch_connect
+  This app will launch [MATLAB] on [TinkerCliffs] and [Infer] -- coming soon.  For issues or requests, please submit a github issue for the [MATLAB OOD app] or [desktop OOD app].<P><HR/><P>
+
+  [JupyterLab OOD app]: https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_jupyter_free
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
+  [desktop OOD app]:https://github.com/AdvancedResearchComputing/ARC-ondemand-apps/tree/master/bc_vt_desktop
