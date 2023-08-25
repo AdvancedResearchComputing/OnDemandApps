@@ -14,7 +14,6 @@ cd "${HOME}"
 module reset
 
 # Load the Jupyter module (required)
-#module load py-jupyter/1.0.0_<%= context.sh_python_version %>
 module load JupyterLab/3.5.0 IJulia
 
 <%- unless context.sh_modules.blank? -%>
