@@ -29,7 +29,8 @@ batch_connect:
 
 script:
   native:
-    - "--nodes=1"
-    - "--cpus-per-task=<%= num_cores.blank? ? "1" : sh_cpus %>"
+    - "--nodes=<%= bc_num_slots %>"
+    - "--cpus-per-task=<%= num_cores.blank? ? "1" : num_cores %>"
     - "--time=<%= bc_num_hours + ":0:0" %>"
-    - "--account=<%= sh_account %>"
+    - "--account=<%= bc_account %>"
+    - "--reservation=<%= reservation %>"
