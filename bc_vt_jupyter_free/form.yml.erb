@@ -17,16 +17,22 @@
 cluster: "tinkercliffs"
 
 form:
-  - sh_extra_jupyter_args
-  - sh_modules
-  - sh_partition
-  - sh_cpus
-  - sh_gpus
-  - sh_mem
+- sh_account
+- sh_partition
+- sh_extra_jupyter_args
+- sh_modules
+- sh_cpus
+- sh_gpus
+- sh_mem
   - bc_num_hours
   - bc_email_on_started
 
 attributes:
+
+  sh_account:
+    label: "Account"
+    help: |
+        <small>Provide the Slurm account (compute allocation name) to use for billing the job usage.</br/>This is not your username.</small>
 
   sh_modules:
     label: "Additional modules (optional)"
