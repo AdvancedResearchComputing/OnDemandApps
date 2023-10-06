@@ -1,0 +1,10 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+
+module load containers/singularity
+singularity run --cleanenv \
+    --bind `pwd`:/cwd,/projects,/work/$USER \
+    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+

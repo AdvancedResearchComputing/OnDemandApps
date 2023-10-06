@@ -1,0 +1,12 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+hostname
+pwd
+
+module load containers/singularity
+singularity run --cleanenv --env PYTHONPATH=/usr/local/lib/python3.8/dist-packages/websockify-0.9.0-py3.8.egg \
+    --bind `pwd`:/cwd,/projects,/work/$USER \
+    /projects/arcsingularity/ubuntu-xfce-v0.0.1.sif &
+#while [ ! -f ./connection.rc ]; do sleep 1; done
+#source connection.rc
+

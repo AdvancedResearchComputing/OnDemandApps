@@ -21,6 +21,7 @@ RUN pip3 install jupyter-matlab-proxy
 # that MATLAB will have a license in the file /opt/matlab/licenses/license.dat
 RUN ln -s /opt/matlab/bin/matlab /usr/local/bin/matlab 
 
+RUN echo "done"
 ########### going to put this in matlab.rc for runtime changes
 #ENV MLM_LICENSE_FILE=/opt/matlab/licenses/license.dat
 #ENV MWI_APP_PORT="8888"
