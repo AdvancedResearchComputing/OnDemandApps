@@ -1,5 +1,5 @@
 ---
-name: Rstudio -- Rstudio >1.4.1717, R>4.1
+name: Rstudio >1.4.1717, R>4.1
 category: Interactive Apps
 role: batch_connect
 description: |
