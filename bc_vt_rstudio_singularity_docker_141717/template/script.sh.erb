@@ -63,7 +63,10 @@ echo
 echo
 echo starting Rstudio Server on $(hostname)
 
-singularity exec --bind=${TMPDIR}:/tmp,/projects, \
+[[ -e "/globalscratch" ]] && GLOBALSCRATCH="/globalscratch"
+echo "Binding /globalscratch? GLOBALSCRATCH=$GLOBALSCRATCH"
+
+singularity exec --bind=${TMPDIR}:/tmp,/projects,$GLOBALSCRATCH \
    --bind=profiles:/etc/rstudio/profiles \
    --bind=$TMPDIR/var/lib:/var/lib/rstudio-server \
    --bind=$TMPDIR/var/run:/var/run/rstudio-server \
