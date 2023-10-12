@@ -63,7 +63,7 @@ attributes:
     label: "R version and package set"
     help: "This defines the R version and basic packages installed. You can install more in your session."
     options:
-    <%- open('../container_list.csv').grep(/1417/).each do |f| -%>
+    <%- open('../container_list.csv').grep(/1417|2022/).each do |f| -%>
       <%- sif = f.split(',').second -%>
       <%- Rver = f.split('_').last.split(',').first.chomp(".sif") -%>
       - [ "R: <%= Rver %>:  <%= sif %>", "<%= sif %>"]

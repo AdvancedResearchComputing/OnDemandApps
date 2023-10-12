@@ -58,33 +58,22 @@ mkdir -p "$TMPDIR/var/lib"
 mkdir -p "$TMPDIR/var/run"
 
 
-## generate config fille
-cat > "rserver.conf" << EOL
-##auth-timeout-minutes=0
-server-app-armor-enabled=0
-server-user=${USER}
-auth-none=0
-www-port=${port}
-auth-pam-helper-path=pam-helper
-auth-encrypt-password=0
-EOL
-
 # Start Rstudio Server
 echo
 echo
-echo starting Rstudio Server now on $(hostname)
+echo starting Rstudio Server on $(hostname)
 
-##--bind=profiles:/etc/rstudio/profiles,Rprofile.site:/usr/local/lib/R/etc/Rprofile.site
-
-## scratch file systems are not universal, so only bind if present
-[[ -d "/globalscratch" ]] && APPENDGLOBALSCRATCH=",/globalscratch"
-echo "/globalscratch binding? APPENDGLOBALSCRATCH=$APPENDGLOBALSCRATCH"
-
-[[ -d "/fastscratch" ]] && APPENDFASTSCRATCH=",/fastscratch"
-echo "/fastscratch binding? APPENDFASTSCRATCH=$APPENDFASTSCRATCH"
-
-singularity exec --writable-tmpfs --bind=${TMPDIR}:/tmp,/projects${APPENDFASTSCRATCH}${APPENDGLOBALSCRATCH} \
-   --bind=/sys/fs/cgroup,profiles:/etc/rstudio/profiles \
-   --bind=$TMPDIR/var/lib:/var/lib/rstudio-server,$TMPDIR/var/run:/var/run/rstudio-server \
-   /global/arcsingularity/<%= context.Rversion %> rserver --config-file rserver.conf
+singularity exec --bind=${TMPDIR}:/tmp,/projects,/fastscratch, \
+   --bind=profiles:/etc/rstudio/profiles \
+   --bind=$TMPDIR/var/lib:/var/lib/rstudio-server \
+   --bind=$TMPDIR/var/run:/var/run/rstudio-server \
+   --bind=/sys/fs/cgroup \
+   /global/arcsingularity/<%= context.Rversion %> rserver \
+   --auth-encrypt-password=0 \
+   --server-app-armor-enabled=0 \
+   --auth-none=0 \
+   --www-port=${port} \
+   --auth-pam-helper-path=pam-helper 
+##   --session-timeout-minutes 0 ## seems to have been removed -- put it in profiles
+##   --rsession-path="${RSESSION_WRAPPER_FILE}" 
 
