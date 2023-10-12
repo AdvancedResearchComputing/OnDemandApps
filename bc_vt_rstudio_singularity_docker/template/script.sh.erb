@@ -21,8 +21,8 @@ echo
 echo "need to make Renviron file dynamically, calling it .Renviron.OOD, seems as though to use this file, needs to be baked into Rstudio config, ie sif"
 
 echo "R_LIBS_USER= ${HOME}/R/OOD/" >.Renviron.OOD.OOD
-singularity exec /projects/arcsingularity/AMD/<%= context.Rversion %> lsb_release -ir | awk '{ print $NF"-" }' | tr -d '\n' >>.Renviron.OOD.OOD
-singularity exec /projects/arcsingularity/AMD/<%= context.Rversion %> Rscript -e 'cat(R.version$major,".",R.version$minor,sep="")' >>.Renviron.OOD.OOD
+singularity exec /global/arcsingularity/<%= context.Rversion %> lsb_release -ir | awk '{ print $NF"-" }' | tr -d '\n' >>.Renviron.OOD.OOD
+singularity exec /global/arcsingularity/<%= context.Rversion %> Rscript -e 'cat(R.version$major,".",R.version$minor,sep="")' >>.Renviron.OOD.OOD
 
 echo make actual change
 echo $(cat .Renviron.OOD.OOD) | sed 's/ //g' >.Renviron.OOD
@@ -62,7 +62,7 @@ echo
 echo starting Rstudio Server on $(hostname)
 
 singularity exec --bind=${TMPDIR}:/tmp,/projects,/fastscratch,profiles:/etc/rstudio/profiles,Rprofile.site:/usr/local/lib/R/etc/Rprofile.site \
-   /projects/arcsingularity/AMD/<%= context.Rversion %> rserver \
+   /global/arcsingularity/<%= context.Rversion %> rserver \
    --auth-encrypt-password=0 \
    --server-app-armor-enabled=0 \
    --auth-none=0 \
