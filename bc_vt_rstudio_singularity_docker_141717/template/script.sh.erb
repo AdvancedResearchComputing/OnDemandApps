@@ -63,10 +63,11 @@ echo
 echo
 echo starting Rstudio Server on $(hostname)
 
-[[ -e "/globalscratch" ]] && GLOBALSCRATCH="/globalscratch"
+## check for presents of /globalscratch and prepare to bind into container (globalscratch may not be available on all clusters)
+[[ -d "/globalscratch" ]] && GLOBALSCRATCH="/globalscratch"
 echo "Binding /globalscratch? GLOBALSCRATCH=$GLOBALSCRATCH"
 
-singularity exec --bind=${TMPDIR}:/tmp,/projects,$GLOBALSCRATCH \
+singularity exec --bind=${TMPDIR}:/tmp,/projects,${GLOBALSCRATCH} \
    --bind=profiles:/etc/rstudio/profiles \
    --bind=$TMPDIR/var/lib:/var/lib/rstudio-server \
    --bind=$TMPDIR/var/run:/var/run/rstudio-server \
