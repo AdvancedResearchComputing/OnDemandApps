@@ -1,6 +1,16 @@
 #!/bin/bash -l
 
-# in case we want to do something fun with host/port/etc later
+
+unset SINGULARITY_TMPDIR
+export SINGULARITYENV_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+singularity run --cleanenv --nv \
+            --bind `pwd`:/cwd,$TMPDIR:/TMPDIR,/projects,/cm \
+                            /projects/arcsingularity/ubuntu-xfce-v0.3.0.sif -d "Desktop-$(hostname)" &
+
+CONTAINER_PID=$!
+
+
 while [ ! -f ./connection.rc ]; do sleep 1; done
 source connection.rc
 cat connection.rc
@@ -14,8 +24,6 @@ echo running on ${host}:${port}
 
 tmux new-session -d -s OOD.tmux.$SLURM_JOBID
 
-# hack to stay alive, change to get sing pid
-walltime=$(squeue -h -j $SLURM_JOBID -o "%l")
-sleeptime=$(echo $walltime | sed 's/^/((/; s/:/)*60+/g' | bc)
-echo converting walltime to sleeptime: $walltime is $sleeptime
-sleep $sleeptime
+wait $CONTAINER_PID
+
+
