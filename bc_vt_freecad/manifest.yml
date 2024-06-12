@@ -1,0 +1,8 @@
+---
+name: FreeCAD Stable
+category: Interactive Apps
+role: batch_connect
+description: |
+  This app will launch [FreeCAD Stable] on [TinkerCliffs] and [Infer].    
+  [TinkerCliffs]: https://www.arc.vt.edu/TinkerCliffs
+  [Infer]: https://www.arc.vt.edu/infer
